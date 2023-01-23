@@ -21,7 +21,7 @@ provider "github" {
 
     template {
         owner = "Karnov-Group-Norway"
-        repository = "az-func-template"
+        repository = "az-func-csharp-template"
         include_all_branches = false
   }
 }*/
