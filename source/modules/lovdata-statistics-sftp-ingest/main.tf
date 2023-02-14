@@ -11,15 +11,10 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "data-dev-k" {
-  name     = "data-dev-k"
-  location = "West Europe"
-}
-
 resource "azurerm_storage_account" "storagesftpdevk" {
-    resource_group_name = "data-dev-k"
+    resource_group_name = var.resource_group_name
     account_tier = "Standard"
-    name = "storagesftpdevk"
+    name = "storagesftp${lower(var.environment_name)}k"
     location = "West Europe"
     account_kind = "StorageV2"
     account_replication_type = "RAGRS"
@@ -28,7 +23,7 @@ resource "azurerm_storage_account" "storagesftpdevk" {
     allow_nested_items_to_be_public = false
     sftp_enabled = true
     tags = {
-        Environment = "Dev"
+        Environment = var.environment_name
     }
 }
 
