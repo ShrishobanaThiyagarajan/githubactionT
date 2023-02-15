@@ -27,4 +27,8 @@ resource "azurerm_storage_account" "sftpstorage" {
     }
 }
 
-
+resource "azurerm_storage_container" "lovdatastats" {
+  name                  = "lovdatastats"
+  storage_account_name  = azurerm_storage_account.sftpstorage.name
+  container_access_type = "private"
+}
