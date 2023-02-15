@@ -11,7 +11,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_storage_account" "storagesftpdevk" {
+resource "azurerm_storage_account" "sftpstorage" {
     resource_group_name = var.resource_group_name
     account_tier = "Standard"
     name = "storagesftp${lower(var.environment_name)}k"
