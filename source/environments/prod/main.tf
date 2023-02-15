@@ -19,13 +19,13 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "data-prod-k" {
-  name     = "data-prod-k"
+resource "azurerm_resource_group" "resourcegroup" {
+  name     = "data-${lower(var.environment_name)}-k"
   location = "West Europe"
 }
 
 module "lovdata-statistics-sftp-ingest" {
   source = "../../modules/lovdata-statistics-sftp-ingest"
-  resource_group_name = azurerm_resource_group.data-prod-k.name
+  resource_group_name = azurerm_resource_group.resourcegroup.name
   environment_name = var.environment_name
 }
