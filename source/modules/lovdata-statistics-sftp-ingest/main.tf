@@ -34,24 +34,37 @@ resource "azurerm_storage_container" "lovdatastats" {
 }
 
 resource "azurerm_storage_account_local_user" "lovdata" {
-  name                 = "ghtest"
+  name                 = "lovdata"
   storage_account_id   = azurerm_storage_account.sftpstorage.id
-  ssh_key_enabled      = true
+  ssh_key_enabled      = false
+  ssh_password_enabled = true
+  home_directory       = "lovdatastats/upload"
+  
+  permission_scope {
+    permissions {
+      create = true
+      write = true
+      list = true
+    }
+    service       = "blob"
+    resource_name = azurerm_storage_container.lovdatastats.name
+  }
+}
+
+resource "azurerm_storage_account_local_user" "lovdataproducer" {
+  name                 = "lovdataproducer"
+  storage_account_id   = azurerm_storage_account.sftpstorage.id
+  ssh_key_enabled      = false
   ssh_password_enabled = true
   home_directory       = "lovdatastats"
   
-  #ssh_authorized_key {
-  #  description = "key1"
-  #  key         = local.first_public_key
-  #}
-  #ssh_authorized_key {
-  #  description = "key2"
-  #  key         = local.second_public_key
-  #}
   permission_scope {
     permissions {
-      read   = true
+      delete = true
+      read = true
       create = true
+      list = true
+      write = true
     }
     service       = "blob"
     resource_name = azurerm_storage_container.lovdatastats.name
