@@ -21,15 +21,15 @@ provider "azurerm" {
 
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_resource_group" "data-dev-k" {
+resource "azurerm_resource_group" "resourcegroup" {
   name     = "data-${lower(var.environment_name)}-k"
   location = "West Europe"
 }
 
 resource "azurerm_key_vault" "keyvault" {
   name                        = "kv-${lower(var.environment_name)}-k"
-  location                    = azurerm_resource_group.data-dev-k.location
-  resource_group_name         = azurerm_resource_group.data-dev-k.name
+  location                    = azurerm_resource_group.resourcegroup.location
+  resource_group_name         = azurerm_resource_group.resourcegroup.name
   enabled_for_disk_encryption = false
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days  = 90
@@ -46,6 +46,6 @@ resource "azurerm_key_vault" "keyvault" {
 
 module "lovdata-statistics-sftp-ingest" {
   source = "../../modules/lovdata-statistics-sftp-ingest"
-  resource_group_name = azurerm_resource_group.data-dev-k.name
+  resource_group_name = azurerm_resource_group.resourcegroup.name
   environment_name = var.environment_name
 }
