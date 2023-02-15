@@ -26,11 +26,23 @@ resource "azurerm_resource_group" "data-dev-k" {
   location = "West Europe"
 }
 
-module "az-func-microservice" {
-    source = "../../modules/az-func-microservice"
-    service_name = "hello-world"
-    github_token = var.github_token
+resource "azurerm_key_vault" "keyvault" {
+  name                        = "kv-${lower(var.environment_name)}-k"
+  location                    = azurerm_resource_group.data-dev-k.location
+  resource_group_name         = azurerm_resource_group.data-dev-k.name
+  enabled_for_disk_encryption = false
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days  = 90
+  purge_protection_enabled    = false
+
+  sku_name = "standard"
 }
+
+#module "az-func-microservice" {
+#    source = "../../modules/az-func-microservice"
+#    service_name = "hello-world"
+#    github_token = var.github_token
+#}
 
 module "lovdata-statistics-sftp-ingest" {
   source = "../../modules/lovdata-statistics-sftp-ingest"
