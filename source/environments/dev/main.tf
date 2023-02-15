@@ -22,7 +22,7 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "data-dev-k" {
-  name     = "data-dev-k"
+  name     = "data-${lower(var.environment_name)}-k"
   location = "West Europe"
 }
 
