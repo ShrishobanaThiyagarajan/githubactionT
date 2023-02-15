@@ -5,6 +5,14 @@ terraform {
         version = "=3.40.0"
     }
   }
+
+  backend "remote" {
+    organization = "Karnov-Group-Norway"
+
+    workspaces {
+      name = "infrastructure-dev"
+    }
+  }
 }
 
 provider "azurerm" {
