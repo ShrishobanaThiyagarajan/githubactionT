@@ -35,7 +35,7 @@ resource "github_repository_file" "appsettings" {
     repository          = github_repository.microservice_repository.name
     branch              = "main"
     file                = "source/Func/appsettings.json"
-    content             = templatefile("modules/az-func-microservice/appsettings.tftpl", { service_name = var.service_name })
+    content             = templatefile("../../modules/az-func-microservice/appsettings.tftpl", { service_name = var.service_name })
     commit_message      = "Managed by Terraform"
     commit_author       = "Terraform User"
     commit_email        = "terraform@example.com"
