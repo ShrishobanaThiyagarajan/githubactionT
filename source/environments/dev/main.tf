@@ -49,3 +49,8 @@ module "lovdata-statistics-sftp-ingest" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
   environment_name    = var.environment_name
 }
+
+output "hello" {
+  description = "Gøran is testing"
+  value = "world"
+}
