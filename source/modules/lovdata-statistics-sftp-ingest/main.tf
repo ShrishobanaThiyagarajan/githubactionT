@@ -94,3 +94,8 @@ output "local_user_lovdataproducer_password" {
   description = "The generated password for `localUser/lovdataproducer`"
   value       = azurerm_storage_account_local_user.lovdataproducer.password
 }
+
+output "primary_connection_string" {
+  sensitive = false
+  value = azurerm_storage_account.sftpstorage.primary_connection_string
+}
