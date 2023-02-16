@@ -38,7 +38,7 @@ resource "azurerm_storage_account_local_user" "lovdata" {
   storage_account_id   = azurerm_storage_account.sftpstorage.id
   ssh_key_enabled      = false
   ssh_password_enabled = true
-  home_directory       = "lovdatastats/upload"
+  home_directory       = "lovdatastats"
 
   permission_scope {
     permissions {
