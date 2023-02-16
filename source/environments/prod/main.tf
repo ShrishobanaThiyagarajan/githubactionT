@@ -45,6 +45,24 @@ module "lovdata-statistics-sftp-ingest" {
   environment_name    = var.environment_name
 }
 
+resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsHostname_secret" {
+  key_vault_id = azurerm_key_vault.keyvault.id
+  name         = "SftpLovdataStatsHostname"
+  value        = module.lovdata-statistics-sftp-ingest.primary_blob_host
+}
+
+resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsUsername_secret" {
+  key_vault_id = azurerm_key_vault.keyvault.id
+  name         = "SftpLovdataStatsUsername"
+  value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_name
+}
+
+resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsPassword_secret" {
+  key_vault_id = azurerm_key_vault.keyvault.id
+  name         = "SftpLovdataStatsPassword"
+  value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
+}
+
 output "lovdata_statistics_sftp" {
     sensitive = true
     value = module.lovdata-statistics-sftp-ingest
