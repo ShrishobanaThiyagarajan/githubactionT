@@ -28,7 +28,7 @@ resource "azurerm_storage_account" "sftpstorage" {
 }
 
 resource "azurerm_storage_container" "lovdatastats" {
-  name                  = "lovdatastats"
+  name                  = "lovdatastats2"
   storage_account_name  = azurerm_storage_account.sftpstorage.name
   container_access_type = "private"
 }
@@ -51,8 +51,10 @@ resource "azurerm_storage_account_local_user" "lovdata" {
   }
 }
 
+# This is Karnov's account. Used to ingest data form lovdata
+# and product pubsub messages.
 resource "azurerm_storage_account_local_user" "lovdataproducer" {
-  name                 = "lovdataproducer"
+  name                 = "lovdataproducer2"
   storage_account_id   = azurerm_storage_account.sftpstorage.id
   ssh_key_enabled      = false
   ssh_password_enabled = true
