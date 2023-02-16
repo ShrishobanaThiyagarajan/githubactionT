@@ -95,7 +95,17 @@ output "local_user_lovdataproducer_password" {
   value       = azurerm_storage_account_local_user.lovdataproducer.password
 }
 
-output "primary_connection_string" {
+output "primary_blob_host" {
   sensitive = false
-  value = azurerm_storage_account.sftpstorage.primary_connection_string
+  value = azurerm_storage_account.sftpstorage.primary_blob_host
+}
+
+output "connection_string_lovdata" {
+  sensitive = false
+  value = "${azurerm_storage_account.sftpstorage.name}.${azurerm_storage_account_local_user.lovdata.name}@${azurerm_storage_account.sftpstorage.primary_blob_host}"
+}
+
+output "connection_string_lovdataproducer" {
+  sensitive = false
+  value = "${azurerm_storage_account.sftpstorage.name}.${azurerm_storage_account_local_user.lovdataproducer.name}@${azurerm_storage_account.sftpstorage.primary_blob_host}"
 }
