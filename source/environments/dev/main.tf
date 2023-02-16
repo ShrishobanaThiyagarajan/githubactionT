@@ -50,7 +50,12 @@ module "lovdata-statistics-sftp-ingest" {
   environment_name    = var.environment_name
 }
 
-output "hello" {
-  description = "Gøran is testing"
-  value = "world"
+output "local_user_lovdata_password" {
+  sensitive = true
+  value = module.lovdata-statistics-sftp-ingest.local_user_lovdata_password
+}
+
+output "local_user_lovdataproducer_password" {
+  sensitive = true
+  value = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
 }
