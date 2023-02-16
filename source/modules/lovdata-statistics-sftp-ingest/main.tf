@@ -73,10 +73,20 @@ resource "azurerm_storage_account_local_user" "lovdataproducer" {
   }
 }
 
+output "local_user_lovdata_name" {
+  description = "Username for `localUser/lovdata`"
+  value       = azurerm_storage_account_local_user.lovdata.name
+}
+
 output "local_user_lovdata_password" {
   sensitive   = true
   description = "The generated password for `localUser/lovdata`"
   value       = azurerm_storage_account_local_user.lovdata.password
+}
+
+output "local_user_lovdataproducer_name" {
+  description = "Username for `localUser/lovdataproducer`"
+  value       = azurerm_storage_account_local_user.lovdataproducer.name
 }
 
 output "local_user_lovdataproducer_password" {

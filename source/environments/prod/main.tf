@@ -44,3 +44,21 @@ module "lovdata-statistics-sftp-ingest" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
   environment_name    = var.environment_name
 }
+
+output "local_user_lovdata_name" {
+  value = module.lovdata-statistics-sftp-ingest.local_user_lovdata_name
+}
+
+output "local_user_lovdata_password" {
+  sensitive = true
+  value = module.lovdata-statistics-sftp-ingest.local_user_lovdata_password
+}
+
+output "local_user_lovdataproducer_name" {
+  value = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_name
+}
+
+output "local_user_lovdataproducer_password" {
+  sensitive = true
+  value = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
+}
