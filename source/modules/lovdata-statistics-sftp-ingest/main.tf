@@ -34,7 +34,7 @@ resource "azurerm_storage_container" "lovdatastats" {
 }
 
 resource "azurerm_storage_account_local_user" "lovdata" {
-  name                 = "lovdata2"
+  name                 = "lovdata"
   storage_account_id   = azurerm_storage_account.sftpstorage.id
   ssh_key_enabled      = false
   ssh_password_enabled = true
@@ -54,7 +54,7 @@ resource "azurerm_storage_account_local_user" "lovdata" {
 # This is Karnov's account. Used to ingest data form lovdata
 # and product pubsub messages.
 resource "azurerm_storage_account_local_user" "lovdataproducer" {
-  name                 = "lovdataproducer2"
+  name                 = "lovdataproducer"
   storage_account_id   = azurerm_storage_account.sftpstorage.id
   ssh_key_enabled      = false
   ssh_password_enabled = true
@@ -93,4 +93,9 @@ output "local_user_lovdataproducer_password" {
   sensitive   = true
   description = "The generated password for `localUser/lovdataproducer`"
   value       = azurerm_storage_account_local_user.lovdataproducer.password
+}
+
+output "primary_connection_string" {
+  sensitive = false
+  value = azurerm_storage_account.sftpstorage.primary_connection_string
 }
