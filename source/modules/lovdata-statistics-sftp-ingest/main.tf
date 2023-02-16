@@ -28,13 +28,13 @@ resource "azurerm_storage_account" "sftpstorage" {
 }
 
 resource "azurerm_storage_container" "lovdatastats" {
-  name                  = "lovdatastats2"
+  name                  = "lovdatastats"
   storage_account_name  = azurerm_storage_account.sftpstorage.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_account_local_user" "lovdata" {
-  name                 = "lovdata"
+  name                 = "lovdata2"
   storage_account_id   = azurerm_storage_account.sftpstorage.id
   ssh_key_enabled      = false
   ssh_password_enabled = true
@@ -73,10 +73,20 @@ resource "azurerm_storage_account_local_user" "lovdataproducer" {
   }
 }
 
+output "local_user_lovdata_name" {
+  description = "Username for `localUser/lovdata`"
+  value       = azurerm_storage_account_local_user.lovdata.name
+}
+
 output "local_user_lovdata_password" {
   sensitive   = true
   description = "The generated password for `localUser/lovdata`"
   value       = azurerm_storage_account_local_user.lovdata.password
+}
+
+output "local_user_lovdataproducer_name" {
+  description = "Username for `localUser/lovdataproducer`"
+  value       = azurerm_storage_account_local_user.lovdataproducer.name
 }
 
 output "local_user_lovdataproducer_password" {
