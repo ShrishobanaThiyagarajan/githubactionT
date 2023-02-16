@@ -50,30 +50,7 @@ module "lovdata-statistics-sftp-ingest" {
   environment_name    = var.environment_name
 }
 
-output "lovdata_statistics" {
+output "lovdata_statistics_sftp" {
     sensitive = true
     value = module.lovdata-statistics-sftp-ingest
-}
-
-output "lovdata_statistics_primary_connection_string" {
-  sensitive = true
-  value = module.lovdata-statistics-sftp-ingest.primary_connection_string
-}
-
-output "lovdata_statistics_local_user_lovdata_name" {
-  value = module.lovdata-statistics-sftp-ingest.local_user_lovdata_name
-}
-
-output "lovdata_statistics_local_user_lovdata_password" {
-  sensitive = true
-  value = module.lovdata-statistics-sftp-ingest.local_user_lovdata_password
-}
-
-output "lovdata_statistics_local_user_lovdataproducer_name" {
-  value = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_name
-}
-
-output "lovdata_statistics_local_user_lovdataproducer_password" {
-  sensitive = true
-  value = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
 }
