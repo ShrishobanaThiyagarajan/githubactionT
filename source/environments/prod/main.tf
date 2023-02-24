@@ -70,6 +70,6 @@ resource "azurerm_key_vault_secret" "keyvault_BackofficeEndpoint" {
 }
 
 output "lovdata_statistics_sftp" {
-    sensitive = true
-    value = module.lovdata-statistics-sftp-ingest
+  sensitive = true
+  value     = module.lovdata-statistics-sftp-ingest
 }
