@@ -63,7 +63,13 @@ resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsPassword_secret" {
   value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
 }
 
+resource "azurerm_key_vault_secret" "keyvault_BackofficeEndpoint" {
+  key_vault_id = azurerm_key_vault.keyvault.id
+  name         = "BackofficeEndpoint"
+  value        = "https://backoffice.karnovgroup.no"
+}
+
 output "lovdata_statistics_sftp" {
-    sensitive = true
-    value = module.lovdata-statistics-sftp-ingest
+  sensitive = true
+  value     = module.lovdata-statistics-sftp-ingest
 }
