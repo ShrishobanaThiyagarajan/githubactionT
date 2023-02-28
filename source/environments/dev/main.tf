@@ -78,8 +78,3 @@ output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
 }
-
-module "shared" {
-  source = "../shared"
-  github_token = var.github_token
-}

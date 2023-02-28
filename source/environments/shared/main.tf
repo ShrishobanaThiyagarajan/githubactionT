@@ -11,7 +11,6 @@ terraform {
 provider "github" {
     token = var.github_token
     owner = "Karnov-Group-Norway"
-
 }
 
 # Going to move over from Azure DevOps
