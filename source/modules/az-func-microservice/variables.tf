@@ -1,11 +1,15 @@
 variable "service_name" {
-    type = string
+  type = string
 }
 
 variable "github_token" {
-    type = string
+  type = string
 }
 
 variable "environment_name" {
-    type = string
+  type = string
+}
+
+variable "resource_group_name" {
+  type = string
 }

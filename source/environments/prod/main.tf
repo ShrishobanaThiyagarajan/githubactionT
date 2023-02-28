@@ -79,4 +79,5 @@ module "az_func_microservice_ContentReports" {
     service_name = "ContentReports"
     github_token = var.github_token
     environment_name = var.environment_name
+    resource_group_name = azurerm_resource_group.resourcegroup.name
 }
