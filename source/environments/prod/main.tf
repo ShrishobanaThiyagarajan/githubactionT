@@ -73,3 +73,10 @@ output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
 }
+
+module "az_func_microservice_ContentReports" {
+    source = "../../modules/az-func-microservice"
+    service_name = "ContentReports"
+    github_token = var.github_token
+    environment_name = var.environment_name
+}

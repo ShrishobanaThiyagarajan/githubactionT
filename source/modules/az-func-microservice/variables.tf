@@ -5,3 +5,7 @@ variable "service_name" {
 variable "github_token" {
     type = string
 }
+
+variable "environment_name" {
+    type = string
+}
