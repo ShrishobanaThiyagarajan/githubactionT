@@ -38,12 +38,6 @@ resource "azurerm_key_vault" "keyvault" {
   sku_name = "standard"
 }
 
-#module "az-func-microservice" {
-#    source = "../../modules/az-func-microservice"
-#    service_name = "hello-world"
-#    github_token = var.github_token
-#}
-
 module "lovdata-statistics-sftp-ingest" {
   source              = "../../modules/lovdata-statistics-sftp-ingest"
   resource_group_name = azurerm_resource_group.resourcegroup.name
@@ -78,3 +72,12 @@ output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
 }
+
+module "az_func_microservice_ContentReports" {
+    source = "../../modules/az-func-microservice"
+    service_name = "ContentReports"
+    github_token = var.github_token
+    environment_name = var.environment_name
+    resource_group_name = azurerm_resource_group.resourcegroup.name
+}
+

@@ -1,49 +1,61 @@
 terraform {
   required_providers {
     github = {
-        source  = "integrations/github"
-        version = "~> 5.0"
+      source  = "integrations/github"
+      version = "~> 5.0"
     }
 
     azurerm = {
-        source  = "hashicorp/azurerm"
-        version = "=3.40.0"
+      source  = "hashicorp/azurerm"
+      version = "=3.40.0"
     }
   }
 }
 
 # Configure the GitHub Provider
 provider "github" {
-    token = var.github_token
-    owner = "Karnov-Group-Norway"
-
+  token = var.github_token
+  owner = "Karnov-Group-Norway"
 }
 
 resource "github_repository" "microservice_repository" {
-    name = var.service_name
-    description = "goeran tester"
-    visibility = "private"
+  count       = lower(var.environment_name) == "dev" ? 1 : 0
+  name        = var.service_name
+  description = "goeran tester"
+  visibility  = "private"
 
-    template {
-        owner = "Karnov-Group-Norway"
-        repository = "az-func-csharp-template"
-        include_all_branches = false
+  template {
+    owner                = "Karnov-Group-Norway"
+    repository           = "az-func-csharp-template"
+    include_all_branches = false
   }
 }
 
 resource "github_repository_file" "appsettings" {
-    repository          = github_repository.microservice_repository.name
-    branch              = "main"
-    file                = "source/Func/appsettings.json"
-    content             = templatefile("../../modules/az-func-microservice/appsettings.tftpl", { service_name = var.service_name })
-    commit_message      = "Managed by Terraform"
-    commit_author       = "Terraform User"
-    commit_email        = "terraform@example.com"
-    overwrite_on_create = true
+  count               = lower(var.environment_name) == "dev" ? 1 : 0
+  repository          = github_repository.microservice_repository[count.index].name
+  branch              = "main"
+  file                = "source/Func/appsettings.json"
+  content             = templatefile("../../modules/az-func-microservice/appsettings.tftpl", { service_name = var.service_name })
+  commit_message      = "Managed by Terraform"
+  commit_author       = "Terraform User"
+  commit_email        = "terraform@example.com"
+  overwrite_on_create = true
 }
 
 provider "azurerm" {
   features {}
+}
+
+resource "azurerm_service_plan" "service_plan" {
+  name                = "${var.service_name}-func-sp-${var.environment_name}-k"
+  resource_group_name = "functions-${var.environment_name}-k"
+  location            = "West Europe"
+  os_type             = "Windows"
+  sku_name            = "Y1"
+  tags = {
+    environment = var.environment_name
+  }
 }
 
 /*resource "azurerm_resource_group" "example" {
