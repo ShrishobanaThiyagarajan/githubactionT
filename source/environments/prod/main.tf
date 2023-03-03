@@ -69,6 +69,12 @@ resource "azurerm_key_vault_secret" "keyvault_BackofficeEndpoint" {
   value        = "https://backoffice.karnovgroup.no"
 }
 
+resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
+  key_vault_id = azurerm_key_vault.keyvault.id
+  name         = "MondayOutdatedNotesBoardId"
+  value        = "4080674685"
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
