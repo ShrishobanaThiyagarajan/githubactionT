@@ -87,3 +87,20 @@ module "az_func_microservice_ContentReports" {
     environment_name = var.environment_name
     resource_group_name = azurerm_resource_group.resourcegroup.name
 }
+
+resource "azurerm_dashboard_grafana" "grafana" {
+  name = "grafana-prod-k"
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  location = "West Europe"
+  api_key_enabled = false
+  deterministic_outbound_ip_enabled = false
+  public_network_access_enabled = true
+
+  identity {
+    type ="SystemAssigned"
+  }
+
+  tags = {
+    environment = var.environment_name
+  }
+}
