@@ -74,6 +74,13 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
   value        = "3875956428"
 }
 
+module "microservice_kDashboardBff" {
+  source              = "../../modules/az-func-microservice-v2"
+  service_name = "kDashboardBff"
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  environment_name    = var.environment_name
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
