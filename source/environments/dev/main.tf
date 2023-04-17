@@ -74,6 +74,18 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
   value        = "3875956428"
 }
 
+module "microservice_kDashboardBff" {
+  source                       = "../../modules/az-func-microservice-v2"
+  service_name                 = "kDashboardBff"
+  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
+  func_resource_group_location = "West Europe"
+  environment_name             = var.environment_name
+  app_settings = {
+    # testing how this will appear
+    "hello": "world"
+  }
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
