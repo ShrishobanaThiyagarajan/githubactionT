@@ -75,10 +75,11 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
 }
 
 module "microservice_kDashboardBff" {
-  source              = "../../modules/az-func-microservice-v2"
-  service_name = "kDashboardBff"
-  resource_group_name = azurerm_resource_group.resourcegroup.name
-  environment_name    = var.environment_name
+  source                       = "../../modules/az-func-microservice-v2"
+  service_name                 = "kDashboardBff"
+  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
+  func_resource_group_location = "West Europe"
+  environment_name             = var.environment_name
 }
 
 output "lovdata_statistics_sftp" {

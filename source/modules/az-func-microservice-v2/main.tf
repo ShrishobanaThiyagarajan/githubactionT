@@ -13,14 +13,27 @@ provider "azurerm" {
 
 resource "azurerm_service_plan" "service_plan" {
   name                = "${var.service_name}-func-sp-${var.environment_name}-k"
-  resource_group_name = "functions-${var.environment_name}-k"
-  location            = "West Europe"
+  resource_group_name = var.func_resource_group_name
+  location            = var.func_resource_group_location
   os_type             = "Windows"
   sku_name            = "Y1"
   tags = {
     environment = var.environment_name
   }
 }
+
+resource "azurerm_storage_account" "func_storage_account" {
+  name                             = "storagefunc${lower(var.environment_name)}k"
+  resource_group_name              = "data-${lower(var.environment_name)}-k"
+  location                         = var.func_resource_group_location
+  account_tier                     = "Standard"
+  min_tls_version                  = "TLS1_0"
+  cross_tenant_replication_enabled = false
+  account_replication_type         = "LRS"
+  timeouts {
+  }
+}
+
 
 /*resource "azurerm_resource_group" "example" {
   name     = "goeran-test"
