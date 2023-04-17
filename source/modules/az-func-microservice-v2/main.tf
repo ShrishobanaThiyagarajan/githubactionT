@@ -35,7 +35,7 @@ resource "azurerm_storage_account" "func_storage_account" {
 }
 
 resource "azurerm_windows_function_app" "windows_func" {
-  name                = var.service_name
+  name                = "${var.service_name}-func-${var.environment_name}-k"
   resource_group_name = var.func_resource_group_name
   location            = var.func_resource_group_location
 
