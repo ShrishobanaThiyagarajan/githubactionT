@@ -43,9 +43,9 @@ resource "azurerm_windows_function_app" "windows_func" {
   storage_account_access_key = azurerm_storage_account.func_storage_account.primary_access_key
   service_plan_id = azurerm_service_plan.service_plan.id
 
-  site_config {
+  site_config {}
 
-  }
+  app_settings = var.app_settings
 
   tags = {
     environment = var.environment_name

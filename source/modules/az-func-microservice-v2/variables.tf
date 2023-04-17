@@ -13,3 +13,7 @@ variable "func_resource_group_name" {
 variable "func_resource_group_location" {
   type = string
 }
+
+variable "app_settings" {
+  type = map
+}

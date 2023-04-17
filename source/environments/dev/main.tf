@@ -80,6 +80,10 @@ module "microservice_kDashboardBff" {
   func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
   func_resource_group_location = "West Europe"
   environment_name             = var.environment_name
+  app_settings = {
+    # testing how this will appear
+    "hello": "world"
+  }
 }
 
 output "lovdata_statistics_sftp" {
