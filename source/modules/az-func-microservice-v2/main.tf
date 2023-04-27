@@ -13,8 +13,8 @@ provider "azurerm" {
 
 resource "azurerm_service_plan" "service_plan" {
   name                = "${var.service_name}-func-sp-${lower(var.environment_name)}-k"
-  resource_group_name = var.func_resource_group_name
-  location            = var.func_resource_group_location
+  resource_group_name = "functions-${var.environment_name}-k"
+  location            = data.azurerm_resource_group.func_resource_group.location
   os_type             = "Windows"
   sku_name            = "Y1"
   tags = {
@@ -25,6 +25,10 @@ resource "azurerm_service_plan" "service_plan" {
 data "azurerm_storage_account" "func_storage_account" {
   name                             = "storagefunc${lower(var.environment_name)}k"
   resource_group_name              = "data-${lower(var.environment_name)}-k"
+}
+
+data "azurerm_resource_group" "func_resource_group" {
+  name = var.func_resource_group_name
 }
 
 resource "azurerm_windows_function_app" "windows_func" {
@@ -41,8 +45,8 @@ resource "azurerm_windows_function_app" "windows_func" {
    }
 
   name                = "${var.service_name}-func-${lower(var.environment_name)}-k"
-  resource_group_name = var.func_resource_group_name
-  location            = var.func_resource_group_location
+  resource_group_name = data.azurerm_resource_group.func_resource_group.name
+  location            = data.azurerm_resource_group.func_resource_group.location
 
   storage_account_name = data.azurerm_storage_account.func_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.func_storage_account.primary_access_key
