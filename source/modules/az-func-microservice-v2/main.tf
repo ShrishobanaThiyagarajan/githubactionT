@@ -22,25 +22,30 @@ resource "azurerm_service_plan" "service_plan" {
   }
 }
 
-resource "azurerm_storage_account" "func_storage_account" {
+data "azurerm_storage_account" "func_storage_account" {
   name                             = "storagefunc${lower(var.environment_name)}k"
   resource_group_name              = "data-${lower(var.environment_name)}-k"
-  location                         = var.func_resource_group_location
-  account_tier                     = "Standard"
-  min_tls_version                  = "TLS1_0"
-  cross_tenant_replication_enabled = false
-  account_replication_type         = "LRS"
-  timeouts {
-  }
 }
 
 resource "azurerm_windows_function_app" "windows_func" {
+  lifecycle {
+     ignore_changes = [
+       app_settings,
+       site_config,
+       storage_account_access_key,
+       outbound_ip_address_list,
+       outbound_ip_addresses,
+       possible_outbound_ip_address_list,
+       possible_outbound_ip_addresses
+     ]
+   }
+
   name                = "${var.service_name}-func-${var.environment_name}-k"
   resource_group_name = var.func_resource_group_name
   location            = var.func_resource_group_location
 
-  storage_account_name = azurerm_storage_account.func_storage_account.name
-  storage_account_access_key = azurerm_storage_account.func_storage_account.primary_access_key
+  storage_account_name = data.azurerm_storage_account.func_storage_account.name
+  storage_account_access_key = data.azurerm_storage_account.func_storage_account.primary_access_key
   service_plan_id = azurerm_service_plan.service_plan.id
 
   site_config {}
