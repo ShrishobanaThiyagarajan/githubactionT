@@ -12,7 +12,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_service_plan" "service_plan" {
-  name                = "${var.service_name}-func-sp-${var.environment_name}-k"
+  name                = "${var.service_name}-func-sp-${lower(var.environment_name)}-k"
   resource_group_name = var.func_resource_group_name
   location            = var.func_resource_group_location
   os_type             = "Windows"
@@ -40,7 +40,7 @@ resource "azurerm_windows_function_app" "windows_func" {
      ]
    }
 
-  name                = "${var.service_name}-func-${var.environment_name}-k"
+  name                = "${var.service_name}-func-${lower(var.environment_name)}-k"
   resource_group_name = var.func_resource_group_name
   location            = var.func_resource_group_location
 
@@ -49,8 +49,6 @@ resource "azurerm_windows_function_app" "windows_func" {
   service_plan_id = azurerm_service_plan.service_plan.id
 
   site_config {}
-
-  app_settings = var.app_settings
 
   tags = {
     environment = var.environment_name

@@ -111,8 +111,6 @@ module "microservice_kDashboardBff" {
   func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
   func_resource_group_location = "West Europe"
   environment_name             = var.environment_name
-  app_settings = {
-  }
 }
  module "UserEventKafkaWriter" {
   source                       = "../../modules/az-func-microservice-v2"
@@ -120,6 +118,4 @@ module "microservice_kDashboardBff" {
   func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
   func_resource_group_location = "West Europe"
   environment_name             = var.environment_name
-  app_settings = {
-  }
 }
