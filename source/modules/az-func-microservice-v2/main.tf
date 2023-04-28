@@ -35,12 +35,7 @@ resource "azurerm_windows_function_app" "windows_func" {
   lifecycle {
      ignore_changes = [
        app_settings,
-       site_config,
-       storage_account_access_key,
-       outbound_ip_address_list,
-       outbound_ip_addresses,
-       possible_outbound_ip_address_list,
-       possible_outbound_ip_addresses
+       #site_config,
      ]
    }
 
