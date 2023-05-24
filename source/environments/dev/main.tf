@@ -81,12 +81,17 @@ module "microservice_kDashboardBff" {
   environment_name         = var.environment_name
   service_plan_sku         = "D1"
 }
-
 module "UserEventKafkaWriter" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "UserEventKafkaWriter"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+}
+module "DocumentPublishedKafkaWriter" {
+  source                       = "../../modules/az-func-microservice-v2"
+  service_name                 = "DocumentPublishedKafkaWriter"
+  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
+  environment_name             = var.environment_name
 }
 
 output "lovdata_statistics_sftp" {

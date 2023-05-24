@@ -117,3 +117,9 @@ module "microservice_kDashboardBff" {
   func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
   environment_name             = var.environment_name
 }
+module "DocumentPublishedKafkaWriter" {
+  source                       = "../../modules/az-func-microservice-v2"
+  service_name                 = "DocumentPublishedKafkaWriter"
+  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
+  environment_name             = var.environment_name
+}
