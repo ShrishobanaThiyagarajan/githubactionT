@@ -16,7 +16,7 @@ resource "azurerm_service_plan" "service_plan" {
   resource_group_name = "functions-${var.environment_name}-k"
   location            = data.azurerm_resource_group.func_resource_group.location
   os_type             = "Windows"
-  sku_name            = "Y1"
+  sku_name            = var.service_plan_sku
   tags = {
     environment = var.environment_name
   }

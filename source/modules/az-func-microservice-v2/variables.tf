@@ -9,3 +9,8 @@ variable "environment_name" {
 variable "func_resource_group_name" {
   type = string
 }
+
+variable "service_plan_sku" {
+  type = string
+  default = "Y1"
+}

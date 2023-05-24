@@ -75,16 +75,18 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
 }
 
 module "microservice_kDashboardBff" {
-  source                       = "../../modules/az-func-microservice-v2"
-  service_name                 = "kDashboardBff"
-  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
-  environment_name             = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "kDashboardBff"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  service_plan_sku         = "D1"
 }
-  module "UserEventKafkaWriter" {
-  source                       = "../../modules/az-func-microservice-v2"
-  service_name                 = "UserEventKafkaWriter"
-  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
-  environment_name             = var.environment_name
+
+module "UserEventKafkaWriter" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "UserEventKafkaWriter"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
 }
 
 output "lovdata_statistics_sftp" {
