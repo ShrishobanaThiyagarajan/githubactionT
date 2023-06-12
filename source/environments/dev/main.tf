@@ -79,7 +79,6 @@ module "microservice_kDashboardBff" {
   service_name             = "kDashboardBff"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
-  service_plan_sku         = "D1"
 }
 module "UserEventKafkaWriter" {
   source                   = "../../modules/az-func-microservice-v2"
