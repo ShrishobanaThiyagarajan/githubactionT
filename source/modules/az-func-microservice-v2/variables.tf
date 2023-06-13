@@ -11,6 +11,21 @@ variable "func_resource_group_name" {
 }
 
 variable "service_plan_sku" {
-  type = string
+  type    = string
   default = "Y1"
+}
+
+variable "provision_repository" {
+  type    = bool
+  default = false
+}
+
+variable "provision_proj_in_sonarcloud" {
+  type    = bool
+  default = false
+}
+
+variable "github_token" {
+  type    = string
+  default = ""
 }

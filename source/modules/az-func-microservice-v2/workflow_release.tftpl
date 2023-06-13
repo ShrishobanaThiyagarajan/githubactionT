@@ -1,0 +1,23 @@
+name: Release
+run-name: Building release 🛠️
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  run:
+    uses: Karnov-Group-Norway/delivery-pipelines/.github/workflows/workflow_release_dotnet.yml@main
+    permissions:
+      contents: write
+      pull-requests: read
+      id-token: write
+    with:
+      sln_path: ./source/Solution.sln
+      func_proj_path: ./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj
+      release_asset_name: ${service_name}
+      enable_sonarcloud: true
+      sonarcloud_project: Karnov-Group-Norway_${service_name}
+    secrets:
+      BINARY_REPO_BLOB_STORAGE_CONN_STR: \$${{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
+      SONARCLOUD_TOKEN: \$${{ secrets.SONAR_TOKEN }}

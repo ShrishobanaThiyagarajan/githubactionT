@@ -87,10 +87,18 @@ module "UserEventKafkaWriter" {
   environment_name         = var.environment_name
 }
 module "DocumentPublishedKafkaWriter" {
-  source                       = "../../modules/az-func-microservice-v2"
-  service_name                 = "DocumentPublishedKafkaWriter"
-  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
-  environment_name             = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "DocumentPublishedKafkaWriter"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+}
+
+module "microservice_Order" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Order"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  provision_repository     = true
 }
 
 output "lovdata_statistics_sftp" {

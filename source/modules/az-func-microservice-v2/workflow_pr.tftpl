@@ -1,0 +1,30 @@
+name: Pull Request
+run-name: Budiling PR 🛠️
+
+env:
+  GH_TOKEN: \$${{ github.token }}
+  PR_NUMBER: \$${{ github.event.number }}
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  run:
+    uses: Karnov-Group-Norway/delivery-pipelines/.github/workflows/workflow_pr_dotnet.yml@main
+    permissions:
+      contents: write
+      pull-requests: read
+      id-token: write
+    with:
+      sln_path: ./source/Solution.sln
+      func_proj_path: ./source/Func/Func.csproj
+      release_asset_name: ${service_name}
+      azure_func_name: ${service_name}-func-Dev-k
+      enable_sonarcloud: \$${{ !contains(github.event.pull_request.labels.*.name, 'skip-code-analysis') }}
+      sonarcloud_project: Karnov-Group-Norway_${service_name}
+    secrets:
+      BINARY_REPO_BLOB_STORAGE_CONN_STR: \$${{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
+      AZURE_FUNCTIONAPP_PUBLISH_PROFILE: \$${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+      SONARCLOUD_TOKEN: \$${{ secrets.SONAR_TOKEN }}
+      GH_TOKEN: \$${{ github.token }}

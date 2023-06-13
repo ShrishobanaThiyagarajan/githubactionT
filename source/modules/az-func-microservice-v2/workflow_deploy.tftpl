@@ -1,0 +1,23 @@
+name: Deploy
+run-name: Deploy release \$${{ github.ref_name }} to \$${{ inputs.environment }} 🚀
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+          type: environment
+
+jobs:
+  run:
+    uses: Karnov-Group-Norway/delivery-pipelines/.github/workflows/workflow_deploy_dotnet.yml@main
+    permissions:
+      contents: write
+      pull-requests: read
+      id-token: write
+    with:
+      environment: \$${{ inputs.environment }}
+      release_asset_name: ${service_name}
+      azure_func_name: ${service_name}-func-Prod-k
+    secrets:
+      BINARY_REPO_BLOB_STORAGE_CONN_STR: \$${{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
+      AZURE_FUNCTIONAPP_PUBLISH_PROFILE: \$${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_PROD }}
