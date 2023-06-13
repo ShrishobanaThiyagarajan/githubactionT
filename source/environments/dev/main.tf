@@ -98,6 +98,7 @@ module "microservice_Order" {
   service_name             = "Order"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  github_token             = var.github_token
   provision_repository     = true
 }
 
