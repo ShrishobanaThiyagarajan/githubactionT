@@ -35,6 +35,41 @@ resource "github_repository" "microservice_repository" {
   }
 }
 
+resource "github_repository_environment" "test" {
+  count       = var.provision_repository ? 1 : 0
+  environment = "test"
+  repository  = github_repository.microservice_repository[0].name
+}
+
+resource "github_actions_environment_secret" "azure_func_publish_profile_test" {
+  count           = var.provision_repository ? 1 : 0
+  repository      = github_repository.microservice_repository[0].name
+  environment     = github_repository_environment.test[0].environment
+  secret_name     = "AZURE_FUNCTIONAPP_PUBLISH_PROFILE"
+  encrypted_value = "TODO"
+}
+
+resource "github_repository_environment" "production" {
+  count       = var.provision_repository ? 1 : 0
+  environment = "test"
+  repository  = github_repository.microservice_repository[0].name
+}
+
+resource "github_actions_environment_secret" "azure_func_publish_profile_production" {
+  count           = var.provision_repository ? 1 : 0
+  repository      = github_repository.microservice_repository[0].name
+  environment     = github_repository_environment.production[0].environment
+  secret_name     = "AZURE_FUNCTIONAPP_PUBLISH_PROFILE"
+  encrypted_value = "TODO"
+}
+
+resource "github_actions_secret" "sonar_token" {
+  count           = var.provision_repository ? 1 : 0
+  repository      = github_repository.microservice_repository[0].name
+  secret_name     = "SONAR_TOKEN"
+  encrypted_value = "hello world"
+}
+
 resource "github_repository_file" "appsettings" {
   count               = var.provision_repository ? 1 : 0
   repository          = github_repository.microservice_repository[count.index].name
