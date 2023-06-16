@@ -116,8 +116,8 @@ module "microservice_Order" {
   # provisiong github repo with environments and secrets
   github_token              = var.github_token
   provision_repository      = true
-  sln_path                  = "./source/Solution.sln"
-  func_path                 = "./source/Func/Func.csproj"
+  sln_path                  = "./source/Order.sln"
+  func_path                 = "./source/Order.Func/KarnovN.Order.Func.csproj.csproj"
   sonarcloud_token          = data.azurerm_key_vault_secret.order_sonarcloud_token.value
   func_publish_profile_test = data.azurerm_key_vault_secret.order_func_publish_profile_test.value
   func_publish_profile_prod = data.azurerm_key_vault_secret.order_func_publish_profile_prod.value
