@@ -20,11 +20,6 @@ variable "provision_repository" {
   default = false
 }
 
-variable "provision_proj_in_sonarcloud" {
-  type    = bool
-  default = false
-}
-
 variable "github_token" {
   type    = string
   default = ""
