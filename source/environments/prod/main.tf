@@ -106,20 +106,29 @@ resource "azurerm_dashboard_grafana" "grafana" {
 }
 
 module "microservice_kDashboardBff" {
-  source                       = "../../modules/az-func-microservice-v2"
-  service_name                 = "kDashboardBff"
-  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
-  environment_name             = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "kDashboardBff"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
 }
- module "UserEventKafkaWriter" {
-  source                       = "../../modules/az-func-microservice-v2"
-  service_name                 = "UserEventKafkaWriter"
-  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
-  environment_name             = var.environment_name
+
+module "UserEventKafkaWriter" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "UserEventKafkaWriter"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
 }
+
 module "DocumentPublishedKafkaWriter" {
-  source                       = "../../modules/az-func-microservice-v2"
-  service_name                 = "DocumentPublishedKafkaWriter"
-  func_resource_group_name     = "functions-${lower(var.environment_name)}-k"
-  environment_name             = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "DocumentPublishedKafkaWriter"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+}
+
+module "microservice_Order" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Order"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
 }
