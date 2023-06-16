@@ -67,7 +67,7 @@ resource "github_actions_secret" "sonar_token" {
   count           = var.provision_repository ? 1 : 0
   repository      = github_repository.microservice_repository[0].name
   secret_name     = "SONAR_TOKEN"
-  encrypted_value = var.sonarcloud_token
+  plaintext_value = var.sonarcloud_token
 }
 
 resource "github_repository_file" "appsettings" {
