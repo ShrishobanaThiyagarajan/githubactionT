@@ -13,8 +13,8 @@ jobs:
       pull-requests: read
       id-token: write
     with:
-      sln_path: ./source/Solution.sln
-      func_proj_path: ./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj
+      sln_path: ${sln_path}
+      func_proj_path: ${func_path}
       release_asset_name: ${service_name}
       enable_sonarcloud: true
       sonarcloud_project: Karnov-Group-Norway_${service_name}

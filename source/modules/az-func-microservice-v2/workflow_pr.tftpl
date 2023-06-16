@@ -17,8 +17,8 @@ jobs:
       pull-requests: read
       id-token: write
     with:
-      sln_path: ./source/Solution.sln
-      func_proj_path: ./source/Func/Func.csproj
+      sln_path: ${sln_path}
+      func_proj_path: ${func_path}
       release_asset_name: ${service_name}
       azure_func_name: ${service_name}-func-Dev-k
       enable_sonarcloud: ${"$"}{{ !contains(github.event.pull_request.labels.*.name, 'skip-code-analysis') }}

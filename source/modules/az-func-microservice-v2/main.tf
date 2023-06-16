@@ -23,10 +23,12 @@ provider "github" {
 }
 
 resource "github_repository" "microservice_repository" {
-  count       = var.provision_repository ? 1 : 0
-  name        = var.service_name
-  description = "Provisioned with kPlatform"
-  visibility  = "private"
+  count                       = var.provision_repository ? 1 : 0
+  name                        = var.service_name
+  description                 = "Provisioned with kPlatform"
+  visibility                  = "private"
+  squash_merge_commit_message = "PR_BODY"
+  squash_merge_commit_title   = "PR_TITLE"
 
   template {
     owner                = "Karnov-Group-Norway"
@@ -83,11 +85,15 @@ resource "github_repository_file" "appsettings" {
 }
 
 resource "github_repository_file" "workflow_pr" {
-  count               = var.provision_repository ? 1 : 0
-  repository          = github_repository.microservice_repository[count.index].name
-  branch              = "main"
-  file                = ".github/workflows/pr.yml"
-  content             = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", { service_name = var.service_name })
+  count      = var.provision_repository ? 1 : 0
+  repository = github_repository.microservice_repository[count.index].name
+  branch     = "main"
+  file       = ".github/workflows/pr.yml"
+  content = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", {
+    service_name = var.service_name,
+    sln_path     = var.sln_path,
+    func_path    = var.func_path
+  })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
   commit_email        = "terraform@karnovgroup.no"
@@ -95,11 +101,15 @@ resource "github_repository_file" "workflow_pr" {
 }
 
 resource "github_repository_file" "workflow_release" {
-  count               = var.provision_repository ? 1 : 0
-  repository          = github_repository.microservice_repository[count.index].name
-  branch              = "main"
-  file                = ".github/workflows/release.yml"
-  content             = templatefile("../../modules/az-func-microservice-v2/workflow_release.tftpl", { service_name = var.service_name })
+  count      = var.provision_repository ? 1 : 0
+  repository = github_repository.microservice_repository[count.index].name
+  branch     = "main"
+  file       = ".github/workflows/release.yml"
+  content = templatefile("../../modules/az-func-microservice-v2/workflow_release.tftpl", {
+    service_name = var.service_name,
+    sln_path     = var.sln_path,
+    func_path    = var.func_path
+  })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
   commit_email        = "terraform@karnovgroup.no"

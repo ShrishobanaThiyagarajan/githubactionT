@@ -20,6 +20,16 @@ variable "provision_repository" {
   default = false
 }
 
+variable "sln_path" {
+  type    = string
+  default = ""
+}
+
+variable "func_path" {
+  type    = string
+  default = ""
+}
+
 variable "sonarcloud_token" {
   type      = string
   default   = ""
