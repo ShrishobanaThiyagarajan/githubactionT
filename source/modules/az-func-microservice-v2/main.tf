@@ -76,9 +76,9 @@ resource "github_repository_file" "appsettings" {
   branch              = "main"
   file                = "source/Func/appsettings.json"
   content             = templatefile("../../modules/az-func-microservice-v2/appsettings.tftpl", { service_name = var.service_name })
-  commit_message      = "Managed by Terraform"
-  commit_author       = "Terraform User"
-  commit_email        = "terraform@example.com"
+  commit_message      = "Managed by kPlatform"
+  commit_author       = "kPlatform"
+  commit_email        = "kplatform@karnovgroup.no"
   overwrite_on_create = true
 }
 
@@ -88,9 +88,9 @@ resource "github_repository_file" "workflow_pr" {
   branch              = "main"
   file                = ".github/workflows/pr.yml"
   content             = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", { service_name = var.service_name })
-  commit_message      = "Managed by Terraform"
-  commit_author       = "Terraform User"
-  commit_email        = "terraform@example.com"
+  commit_message      = "Managed by kPlatform"
+  commit_author       = "kPlatform"
+  commit_email        = "terraform@karnovgroup.no"
   overwrite_on_create = true
 }
 
@@ -100,9 +100,9 @@ resource "github_repository_file" "workflow_release" {
   branch              = "main"
   file                = ".github/workflows/release.yml"
   content             = templatefile("../../modules/az-func-microservice-v2/workflow_release.tftpl", { service_name = var.service_name })
-  commit_message      = "Managed by Terraform"
-  commit_author       = "Terraform User"
-  commit_email        = "terraform@example.com"
+  commit_message      = "Managed by kPlatform"
+  commit_author       = "kPlatform"
+  commit_email        = "terraform@karnovgroup.no"
   overwrite_on_create = true
 }
 
@@ -112,9 +112,9 @@ resource "github_repository_file" "workflow_deploy" {
   branch              = "main"
   file                = ".github/workflows/deploy.yml"
   content             = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", { service_name = var.service_name })
-  commit_message      = "Managed by Terraform"
-  commit_author       = "Terraform User"
-  commit_email        = "terraform@example.com"
+  commit_message      = "Managed by kPlatform"
+  commit_author       = "kPlatform"
+  commit_email        = "terraform@karnovgroup.no"
   overwrite_on_create = true
 }
 

@@ -19,5 +19,5 @@ jobs:
       enable_sonarcloud: true
       sonarcloud_project: Karnov-Group-Norway_${service_name}
     secrets:
-      BINARY_REPO_BLOB_STORAGE_CONN_STR: \$${{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
-      SONARCLOUD_TOKEN: \$${{ secrets.SONAR_TOKEN }}
+      BINARY_REPO_BLOB_STORAGE_CONN_STR: ${"$"}{{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
+      SONARCLOUD_TOKEN: ${"$"}{{ secrets.SONAR_TOKEN }}
