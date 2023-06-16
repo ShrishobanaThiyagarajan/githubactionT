@@ -25,7 +25,7 @@ provider "github" {
 resource "github_repository" "microservice_repository" {
   count       = var.provision_repository ? 1 : 0
   name        = var.service_name
-  description = "goeran tester"
+  description = "Provisioned with kPlatform"
   visibility  = "private"
 
   template {
@@ -46,7 +46,7 @@ resource "github_actions_environment_secret" "azure_func_publish_profile_test" {
   repository      = github_repository.microservice_repository[0].name
   environment     = github_repository_environment.test[0].environment
   secret_name     = "AZURE_FUNCTIONAPP_PUBLISH_PROFILE"
-  encrypted_value = "TODO"
+  plaintext_value = var.func_publish_profile_test
 }
 
 resource "github_repository_environment" "production" {
@@ -60,14 +60,14 @@ resource "github_actions_environment_secret" "azure_func_publish_profile_product
   repository      = github_repository.microservice_repository[0].name
   environment     = github_repository_environment.production[0].environment
   secret_name     = "AZURE_FUNCTIONAPP_PUBLISH_PROFILE"
-  encrypted_value = "TODO"
+  plaintext_value = var.func_publish_profile_prod
 }
 
 resource "github_actions_secret" "sonar_token" {
   count           = var.provision_repository ? 1 : 0
   repository      = github_repository.microservice_repository[0].name
   secret_name     = "SONAR_TOKEN"
-  encrypted_value = "TODO"
+  encrypted_value = var.sonarcloud_token
 }
 
 resource "github_repository_file" "appsettings" {

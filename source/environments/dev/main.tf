@@ -93,13 +93,32 @@ module "DocumentPublishedKafkaWriter" {
   environment_name         = var.environment_name
 }
 
+data "azurerm_key_vault_secret" "order_sonarcloud_token" {
+  name         = "OrderSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "order_func_publish_profile_test" {
+  name         = "OrderPublishProfileTest"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "order_func_publish_profile_prod" {
+  name         = "OrderPublishProfileProd"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
 module "microservice_Order" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "Order"
-  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
-  environment_name         = var.environment_name
-  github_token             = var.github_token
-  provision_repository     = true
+  source                    = "../../modules/az-func-microservice-v2"
+  service_name              = "Order"
+  func_resource_group_name  = "functions-${lower(var.environment_name)}-k"
+  environment_name          = var.environment_name
+  # provisiong github repo with environments and secrets
+  github_token              = var.github_token
+  provision_repository      = true
+  sonarcloud_token          = data.azurerm_key_vault_secret.order_sonarcloud_token.value
+  func_publish_profile_test = data.azurerm_key_vault_secret.order_func_publish_profile_test.value
+  func_publish_profile_prod = data.azurerm_key_vault_secret.order_func_publish_profile_prod.value
 }
 
 output "lovdata_statistics_sftp" {

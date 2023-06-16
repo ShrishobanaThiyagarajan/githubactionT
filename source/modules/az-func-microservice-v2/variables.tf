@@ -20,6 +20,24 @@ variable "provision_repository" {
   default = false
 }
 
+variable "sonarcloud_token" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
+variable "func_publish_profile_test" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
+variable "func_publish_profile_prod" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
 variable "github_token" {
   type    = string
   default = ""
