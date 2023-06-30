@@ -132,3 +132,9 @@ module "microservice_Order" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
+module "microservice_HubSpotIntegration" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "HubSpotIntegration"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+}
