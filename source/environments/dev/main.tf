@@ -107,6 +107,15 @@ data "azurerm_key_vault_secret" "order_func_publish_profile_prod" {
   name         = "OrderPublishProfileProd"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
+data "azurerm_key_vault_secret" "hubspotintegration_sonarcloud_token" {
+  name         = "HubSpotIntegrationSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "hubspotintegration_func_publish_profile_test" {
+  name         = "HubSpotIntegrationPublishProfile"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
 
 module "microservice_Order" {
   source                   = "../../modules/az-func-microservice-v2"
@@ -129,6 +138,10 @@ module "microservice_HubSpotIntegration" {
   environment_name         = var.environment_name
   github_token              = var.github_token
   provision_repository      = true
+  sln_path                  = "./source/HubSpotIntegration.sln"
+  func_path                 = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+  sonarcloud_token          = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
+  func_publish_profile_test = data.azurerm_key_vault_secret.hubspotintegration_func_publish_profile_test.value
   
 }
 output "lovdata_statistics_sftp" {
