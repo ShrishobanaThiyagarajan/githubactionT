@@ -132,9 +132,14 @@ module "microservice_Order" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
+/* data "azurerm_key_vault_secret" "hubspotintegration_func_publish_profile" {
+  name         = "HubSpotIntegrationPublishProfile"
+  key_vault_id = azurerm_key_vault.keyvault.id
+} */
 module "microservice_HubSpotIntegration" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "HubSpotIntegration"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  /* func_publish_profile_prod = data.azurerm_key_vault_secret.hubspotintegration_func_publish_profile.value */
 }
