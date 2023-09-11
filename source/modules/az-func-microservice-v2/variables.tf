@@ -48,6 +48,18 @@ variable "func_publish_profile_prod" {
   sensitive = true
 }
 
+variable "azure_credentials_test" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
+variable "azure_credentials_prod" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
 variable "github_token" {
   type    = string
   default = ""

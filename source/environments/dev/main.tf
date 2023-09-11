@@ -107,6 +107,7 @@ data "azurerm_key_vault_secret" "order_func_publish_profile_prod" {
   name         = "OrderPublishProfileProd"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
+
 data "azurerm_key_vault_secret" "hubspotintegration_sonarcloud_token" {
   name         = "HubSpotIntegrationSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
@@ -130,20 +131,25 @@ module "microservice_Order" {
   sonarcloud_token          = data.azurerm_key_vault_secret.order_sonarcloud_token.value
   func_publish_profile_test = data.azurerm_key_vault_secret.order_func_publish_profile_test.value
   func_publish_profile_prod = data.azurerm_key_vault_secret.order_func_publish_profile_prod.value
+  azure_credentials_test    = var.azure_credentials_test
+  azure_credentials_prod    = var.azure_credentials_prod
 }
+
 module "microservice_HubSpotIntegration" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "HubSpotIntegration"
-  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
-  environment_name         = var.environment_name
+  source                    = "../../modules/az-func-microservice-v2"
+  service_name              = "HubSpotIntegration"
+  func_resource_group_name  = "functions-${lower(var.environment_name)}-k"
+  environment_name          = var.environment_name
   github_token              = var.github_token
   provision_repository      = true
   sln_path                  = "./source/HubSpotIntegration.sln"
   func_path                 = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
   sonarcloud_token          = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
   func_publish_profile_test = data.azurerm_key_vault_secret.hubspotintegration_func_publish_profile_test.value
-  
+  azure_credentials_test    = var.azure_credentials_test
+  azure_credentials_prod    = var.azure_credentials_prod
 }
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
