@@ -28,3 +28,4 @@ jobs:
       AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${"$"}{{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
       SONARCLOUD_TOKEN: ${"$"}{{ secrets.SONAR_TOKEN }}
       GH_TOKEN: ${"$"}{{ github.token }}
+      AZURE_CREDENTIALS: ${"$"}{{ github.AZURE_CREDENTIALS }}
