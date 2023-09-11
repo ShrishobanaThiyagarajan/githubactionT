@@ -152,7 +152,10 @@ resource "azurerm_windows_function_app" "windows_func" {
   lifecycle {
     ignore_changes = [
       app_settings,
-      #site_config,
+      site_config,
+      tags,
+      sticky_settings,
+      builtin_logging_enabled
     ]
   }
 
