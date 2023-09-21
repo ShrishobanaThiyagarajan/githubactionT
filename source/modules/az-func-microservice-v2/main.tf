@@ -137,7 +137,10 @@ resource "github_repository_file" "workflow_deploy" {
   repository          = github_repository.microservice_repository[count.index].name
   branch              = "main"
   file                = ".github/workflows/deploy.yml"
-  content             = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", { service_name = var.service_name })
+  content             = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", { 
+    service_name = var.service_name,
+    func_path    = var.func_path
+  })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
   commit_email        = "terraform@karnovgroup.no"

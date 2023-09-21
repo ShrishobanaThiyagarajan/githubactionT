@@ -17,6 +17,7 @@ jobs:
     with:
       environment: ${"$"}{{ inputs.environment }}
       release_asset_name: ${service_name}
+      func_proj_path: ${func_path}
     secrets:
       BINARY_REPO_BLOB_STORAGE_CONN_STR: ${"$"}{{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
       AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${"$"}{{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
