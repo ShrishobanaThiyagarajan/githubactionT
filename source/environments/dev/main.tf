@@ -74,18 +74,32 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
   value        = "3875956428"
 }
 
+data "azurerm_key_vault_secret" "kdashboardbff_sonarcloud_token" {
+  name         = "kDashboardBffSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
 module "microservice_kDashboardBff" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "kDashboardBff"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  github_token             = var.github_token
+  provision_repository     = true
+  sln_path                 = "./kDashboardBff.sln"
+  func_path                = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj"
+  sonarcloud_token         = data.azurerm_key_vault_secret.kdashboardbff_sonarcloud_token.value
+  azure_credentials_test   = var.azure_credentials_test
+  azure_credentials_prod   = var.azure_credentials_prod
 }
+
 module "UserEventKafkaWriter" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "UserEventKafkaWriter"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
+
 module "DocumentPublishedKafkaWriter" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "DocumentPublishedKafkaWriter"
@@ -98,13 +112,10 @@ data "azurerm_key_vault_secret" "order_sonarcloud_token" {
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
-
 data "azurerm_key_vault_secret" "hubspotintegration_sonarcloud_token" {
   name         = "HubSpotIntegrationSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
-
-
 
 module "microservice_Order" {
   source                   = "../../modules/az-func-microservice-v2"
@@ -112,27 +123,27 @@ module "microservice_Order" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
   # provisiong github repo with environments and secrets
-  github_token              = var.github_token
-  provision_repository      = true
-  sln_path                  = "./source/Order.sln"
-  func_path                 = "./source/Order.Func/KarnovN.Order.Func.csproj"
-  sonarcloud_token          = data.azurerm_key_vault_secret.order_sonarcloud_token.value
-  azure_credentials_test    = var.azure_credentials_test
-  azure_credentials_prod    = var.azure_credentials_prod
+  github_token           = var.github_token
+  provision_repository   = true
+  sln_path               = "./source/Order.sln"
+  func_path              = "./source/Order.Func/KarnovN.Order.Func.csproj"
+  sonarcloud_token       = data.azurerm_key_vault_secret.order_sonarcloud_token.value
+  azure_credentials_test = var.azure_credentials_test
+  azure_credentials_prod = var.azure_credentials_prod
 }
 
 module "microservice_HubSpotIntegration" {
-  source                    = "../../modules/az-func-microservice-v2"
-  service_name              = "HubSpotIntegration"
-  func_resource_group_name  = "functions-${lower(var.environment_name)}-k"
-  environment_name          = var.environment_name
-  github_token              = var.github_token
-  provision_repository      = true
-  sln_path                  = "./source/HubSpotIntegration.sln"
-  func_path                 = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
-  sonarcloud_token          = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
-  azure_credentials_test    = var.azure_credentials_test
-  azure_credentials_prod    = var.azure_credentials_prod
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "HubSpotIntegration"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  github_token             = var.github_token
+  provision_repository     = true
+  sln_path                 = "./source/HubSpotIntegration.sln"
+  func_path                = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+  sonarcloud_token         = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
+  azure_credentials_test   = var.azure_credentials_test
+  azure_credentials_prod   = var.azure_credentials_prod
 }
 
 output "lovdata_statistics_sftp" {
