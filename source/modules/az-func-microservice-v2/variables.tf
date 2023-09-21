@@ -36,18 +36,6 @@ variable "sonarcloud_token" {
   sensitive = true
 }
 
-variable "func_publish_profile_test" {
-  type      = string
-  default   = ""
-  sensitive = true
-}
-
-variable "func_publish_profile_prod" {
-  type      = string
-  default   = ""
-  sensitive = true
-}
-
 variable "azure_credentials_test" {
   type      = string
   default   = ""

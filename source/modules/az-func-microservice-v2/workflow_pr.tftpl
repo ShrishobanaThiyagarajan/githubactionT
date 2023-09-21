@@ -25,7 +25,6 @@ jobs:
       sonarcloud_project: Karnov-Group-Norway_${service_name}
     secrets:
       BINARY_REPO_BLOB_STORAGE_CONN_STR: ${"$"}{{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
-      AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${"$"}{{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
       SONARCLOUD_TOKEN: ${"$"}{{ secrets.SONAR_TOKEN }}
       GH_TOKEN: ${"$"}{{ github.token }}
       AZURE_CREDENTIALS: ${"$"}{{ secrets.AZURE_CREDENTIALS }}

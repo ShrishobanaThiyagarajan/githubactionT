@@ -98,25 +98,13 @@ data "azurerm_key_vault_secret" "order_sonarcloud_token" {
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "order_func_publish_profile_test" {
-  name         = "OrderPublishProfileTest"
-  key_vault_id = azurerm_key_vault.keyvault.id
-}
-
-data "azurerm_key_vault_secret" "order_func_publish_profile_prod" {
-  name         = "OrderPublishProfileProd"
-  key_vault_id = azurerm_key_vault.keyvault.id
-}
 
 data "azurerm_key_vault_secret" "hubspotintegration_sonarcloud_token" {
   name         = "HubSpotIntegrationSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "hubspotintegration_func_publish_profile_test" {
-  name         = "HubSpotIntegrationPublishProfile"
-  key_vault_id = azurerm_key_vault.keyvault.id
-}
+
 
 module "microservice_Order" {
   source                   = "../../modules/az-func-microservice-v2"
@@ -129,8 +117,6 @@ module "microservice_Order" {
   sln_path                  = "./source/Order.sln"
   func_path                 = "./source/Order.Func/KarnovN.Order.Func.csproj"
   sonarcloud_token          = data.azurerm_key_vault_secret.order_sonarcloud_token.value
-  func_publish_profile_test = data.azurerm_key_vault_secret.order_func_publish_profile_test.value
-  func_publish_profile_prod = data.azurerm_key_vault_secret.order_func_publish_profile_prod.value
   azure_credentials_test    = var.azure_credentials_test
   azure_credentials_prod    = var.azure_credentials_prod
 }
@@ -145,7 +131,6 @@ module "microservice_HubSpotIntegration" {
   sln_path                  = "./source/HubSpotIntegration.sln"
   func_path                 = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
   sonarcloud_token          = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
-  func_publish_profile_test = data.azurerm_key_vault_secret.hubspotintegration_func_publish_profile_test.value
   azure_credentials_test    = var.azure_credentials_test
   azure_credentials_prod    = var.azure_credentials_prod
 }
