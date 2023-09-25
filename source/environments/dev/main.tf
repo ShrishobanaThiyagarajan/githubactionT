@@ -139,6 +139,7 @@ data "azurerm_key_vault_secret" "alerter_sonarcloud_token" {
   name         = "AlerterSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
+
 module "microservice_Alerter" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "Alerter"
@@ -152,6 +153,26 @@ module "microservice_Alerter" {
   azure_credentials_test   = var.azure_credentials_test
   azure_credentials_prod   = var.azure_credentials_prod
 }
+
+data "azurerm_key_vault_secret" "documentlog_sonarcloud_token" {
+  name         = "DocumentLogSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_DocumentLog" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "DocumentLog"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  github_token             = var.github_token
+  provision_repository     = true
+  sln_path                 = "./DocumentLog.sln"
+  func_path                = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+  sonarcloud_token         = data.azurerm_key_vault_secret.documentlog_sonarcloud_token.value
+  azure_credentials_test   = var.azure_credentials_test
+  azure_credentials_prod   = var.azure_credentials_prod
+}
+
 
 output "lovdata_statistics_sftp" {
   sensitive = true
