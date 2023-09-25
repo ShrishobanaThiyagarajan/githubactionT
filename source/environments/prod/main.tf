@@ -146,3 +146,10 @@ module "microservice_Alerter" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
+
+module "microservice_DocumentLog" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "DocumentLog"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+}
