@@ -112,27 +112,31 @@ module "microservice_Order" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
   # provisiong github repo with environments and secrets
-  github_token              = var.github_token
-  provision_repository      = true
-  sln_path                  = "./source/Order.sln"
-  func_path                 = "./source/Order.Func/KarnovN.Order.Func.csproj"
-  sonarcloud_token          = data.azurerm_key_vault_secret.order_sonarcloud_token.value
-  azure_credentials_test    = var.azure_credentials_test
-  azure_credentials_prod    = var.azure_credentials_prod
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./source/Order.sln"
+  func_path                        = "./source/Order.Func/KarnovN.Order.Func.csproj"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.order_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
 module "microservice_HubSpotIntegration" {
-  source                    = "../../modules/az-func-microservice-v2"
-  service_name              = "HubSpotIntegration"
-  func_resource_group_name  = "functions-${lower(var.environment_name)}-k"
-  environment_name          = var.environment_name
-  github_token              = var.github_token
-  provision_repository      = true
-  sln_path                  = "./source/HubSpotIntegration.sln"
-  func_path                 = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
-  sonarcloud_token          = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
-  azure_credentials_test    = var.azure_credentials_test
-  azure_credentials_prod    = var.azure_credentials_prod
+  source                           = "../../modules/az-func-microservice-v2"
+  service_name                     = "HubSpotIntegration"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./source/HubSpotIntegration.sln"
+  func_path                        = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
 data "azurerm_key_vault_secret" "alerter_sonarcloud_token" {
@@ -141,17 +145,19 @@ data "azurerm_key_vault_secret" "alerter_sonarcloud_token" {
 }
 
 module "microservice_Alerter" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "Alerter"
-  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
-  environment_name         = var.environment_name
-  github_token             = var.github_token
-  provision_repository     = true
-  sln_path                 = "./Alerter.sln"
-  func_path                = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
-  sonarcloud_token         = data.azurerm_key_vault_secret.alerter_sonarcloud_token.value
-  azure_credentials_test   = var.azure_credentials_test
-  azure_credentials_prod   = var.azure_credentials_prod
+  source                           = "../../modules/az-func-microservice-v2"
+  service_name                     = "Alerter"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./Alerter.sln"
+  func_path                        = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.alerter_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
 data "azurerm_key_vault_secret" "documentlog_sonarcloud_token" {
@@ -160,17 +166,19 @@ data "azurerm_key_vault_secret" "documentlog_sonarcloud_token" {
 }
 
 module "microservice_DocumentLog" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "DocumentLog"
-  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
-  environment_name         = var.environment_name
-  github_token             = var.github_token
-  provision_repository     = true
-  sln_path                 = "./DocumentLog.sln"
-  func_path                = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
-  sonarcloud_token         = data.azurerm_key_vault_secret.documentlog_sonarcloud_token.value
-  azure_credentials_test   = var.azure_credentials_test
-  azure_credentials_prod   = var.azure_credentials_prod
+  source                           = "../../modules/az-func-microservice-v2"
+  service_name                     = "DocumentLog"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./DocumentLog.sln"
+  func_path                        = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.documentlog_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
 
