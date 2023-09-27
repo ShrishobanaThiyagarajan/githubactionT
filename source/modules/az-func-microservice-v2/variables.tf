@@ -52,3 +52,15 @@ variable "github_token" {
   type    = string
   default = ""
 }
+
+variable "teams_incoming_webhooks_url_test" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
+variable "teams_incoming_webhooks_url_prod" {
+  type      = string
+  default   = ""
+  sensitive = true
+}

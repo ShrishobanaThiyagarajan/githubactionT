@@ -51,6 +51,14 @@ resource "github_actions_environment_secret" "azure_credentials_test" {
   plaintext_value = var.azure_credentials_test
 }
 
+resource "github_actions_environment_secret" "teams_incoming_webhooks_url_test" {
+  count           = var.provision_repository ? 1 : 0
+  repository      = github_repository.microservice_repository[0].name
+  environment     = github_repository_environment.test[0].environment
+  secret_name     = "TEAMS_INCOMING_WEBHOOKS_URL"
+  plaintext_value = var.teams_incoming_webhooks_url_test
+}
+
 resource "github_repository_environment" "production" {
   count       = var.provision_repository ? 1 : 0
   environment = "production"
@@ -63,6 +71,14 @@ resource "github_actions_environment_secret" "azure_credentials_production" {
   environment     = github_repository_environment.production[0].environment
   secret_name     = "AZURE_CREDENTIALS"
   plaintext_value = var.azure_credentials_prod
+}
+
+resource "github_actions_environment_secret" "teams_incoming_webhooks_url_prod" {
+  count           = var.provision_repository ? 1 : 0
+  repository      = github_repository.microservice_repository[0].name
+  environment     = github_repository_environment.production[0].environment
+  secret_name     = "TEAMS_INCOMING_WEBHOOKS_URL"
+  plaintext_value = var.teams_incoming_webhooks_url_prod
 }
 
 resource "github_actions_secret" "sonar_token" {
