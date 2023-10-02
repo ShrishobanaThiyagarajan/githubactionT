@@ -41,6 +41,7 @@ resource "github_issue_label" "skip_code_analysis" {
   count = var.provision_repository ? 1 : 0
   repository = github_repository.microservice_repository[0].name
   name       = "skip-code-analysis"
+  description = "Delivery pipelines / CI/CD will skip running code analysis"
   color      = "297907"
 }
 
