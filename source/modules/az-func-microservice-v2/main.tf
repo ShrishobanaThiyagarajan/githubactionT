@@ -37,6 +37,13 @@ resource "github_repository" "microservice_repository" {
   }
 }
 
+resource "github_issue_label" "skip_code_analysis" {
+  count = var.provision_repository ? 1 : 0
+  repository = github_repository.microservice_repository[0].name
+  name       = "skip-code-analysis"
+  color      = "297907"
+}
+
 resource "github_repository_environment" "test" {
   count       = var.provision_repository ? 1 : 0
   environment = "test"
