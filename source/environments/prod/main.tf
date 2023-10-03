@@ -160,3 +160,10 @@ module "microservice_SalesInfo" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
+
+module "microservice_MondayIntegration" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "MondayIntegration"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+}
