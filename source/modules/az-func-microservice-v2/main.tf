@@ -38,11 +38,11 @@ resource "github_repository" "microservice_repository" {
 }
 
 resource "github_issue_label" "skip_code_analysis" {
-  count = var.provision_repository ? 1 : 0
-  repository = github_repository.microservice_repository[0].name
-  name       = "skip-code-analysis"
+  count       = var.provision_repository ? 1 : 0
+  repository  = github_repository.microservice_repository[0].name
+  name        = "skip-code-analysis"
   description = "Delivery pipelines / CI/CD will skip running code analysis"
-  color      = "297907"
+  color       = "297907"
 }
 
 resource "github_repository_environment" "test" {
@@ -114,9 +114,10 @@ resource "github_repository_file" "workflow_pr" {
   branch     = "main"
   file       = ".github/workflows/pr.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", {
-    service_name = var.service_name,
-    sln_path     = var.sln_path,
-    func_path    = var.func_path
+    service_name            = var.service_name,
+    sln_path                = var.sln_path,
+    func_path               = var.func_path,
+    build_and_release_nuget = var.build_and_release_nuget
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
@@ -130,9 +131,10 @@ resource "github_repository_file" "workflow_release" {
   branch     = "main"
   file       = ".github/workflows/release.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_release.tftpl", {
-    service_name = var.service_name,
-    sln_path     = var.sln_path,
-    func_path    = var.func_path
+    service_name            = var.service_name,
+    sln_path                = var.sln_path,
+    func_path               = var.func_path,
+    build_and_release_nuget = var.build_and_release_nuget
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
@@ -141,11 +143,11 @@ resource "github_repository_file" "workflow_release" {
 }
 
 resource "github_repository_file" "workflow_deploy" {
-  count               = var.provision_repository ? 1 : 0
-  repository          = github_repository.microservice_repository[count.index].name
-  branch              = "main"
-  file                = ".github/workflows/deploy.yml"
-  content             = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", { 
+  count      = var.provision_repository ? 1 : 0
+  repository = github_repository.microservice_repository[count.index].name
+  branch     = "main"
+  file       = ".github/workflows/deploy.yml"
+  content = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", {
     service_name = var.service_name,
     func_path    = var.func_path
   })

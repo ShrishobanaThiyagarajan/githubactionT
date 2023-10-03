@@ -64,3 +64,8 @@ variable "teams_incoming_webhooks_url_prod" {
   default   = ""
   sensitive = true
 }
+
+variable "build_and_release_nuget" {
+  type    = bool
+  default = true
+}

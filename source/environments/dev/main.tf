@@ -130,8 +130,9 @@ module "microservice_HubSpotIntegration" {
   environment_name                 = var.environment_name
   github_token                     = var.github_token
   provision_repository             = true
-  sln_path                         = "./source/HubSpotIntegration.sln"
+  sln_path                         = "./HubSpotIntegration.sln"
   func_path                        = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+  build_and_release_nuget          = false
   sonarcloud_token                 = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
