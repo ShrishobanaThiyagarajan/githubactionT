@@ -175,6 +175,7 @@ module "microservice_DocumentLog" {
   provision_repository             = true
   sln_path                         = "./DocumentLog.sln"
   func_path                        = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+  build_and_release_nuget          = false
   sonarcloud_token                 = data.azurerm_key_vault_secret.documentlog_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
