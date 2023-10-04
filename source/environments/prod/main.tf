@@ -170,7 +170,7 @@ module "microservice_MondayIntegration" {
 
 module "microservice_UserEvents" {
   source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "UserEventsIntegration"
+  service_name             = "UserEvents"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
