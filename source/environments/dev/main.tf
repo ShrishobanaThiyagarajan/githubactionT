@@ -130,7 +130,7 @@ module "microservice_Order" {
   funcs = [
     {
       service_name = "Order",
-      func_path    = "./source/Order.Func/Order.Func.csproj"
+      func_path    = "./source/Order.Func/KarnovN.Order.Func.csproj"
     }
   ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
