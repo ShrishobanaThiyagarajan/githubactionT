@@ -1,4 +1,4 @@
-name: Release
+name: Release: ${service_name}
 run-name: Building release 🛠️
 
 on:
@@ -21,7 +21,7 @@ jobs:
       release_asset_name: ${service_name}
       build_and_release_nuget: ${build_and_release_nuget}
       enable_sonarcloud: true
-      sonarcloud_project: Karnov-Group-Norway_${service_name}
+      sonarcloud_project: ${sonarcloud_project}
     secrets:
       BINARY_REPO_BLOB_STORAGE_CONN_STR: ${"$"}{{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
       SONARCLOUD_TOKEN: ${"$"}{{ secrets.SONAR_TOKEN }}

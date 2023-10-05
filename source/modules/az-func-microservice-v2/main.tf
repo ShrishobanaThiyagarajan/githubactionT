@@ -117,7 +117,10 @@ resource "github_repository_file" "workflow_pr" {
     service_name            = var.funcs[count.index].service_name,
     sln_path                = var.sln_path,
     func_path               = var.funcs[count.index].func_path,
-    build_and_release_nuget = var.build_and_release_nuget
+    build_and_release_nuget = var.build_and_release_nuget,
+    # Use first service name as the convention for the project name.
+    # Assuming it represents the whole repository.
+    sonarcloud_project = "Karnov-Group-Norway_${var.funcs[0].service_name}"
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
@@ -134,7 +137,10 @@ resource "github_repository_file" "workflow_release" {
     service_name            = var.funcs[count.index].service_name,
     sln_path                = var.sln_path,
     func_path               = var.funcs[count.index].func_path,
-    build_and_release_nuget = var.build_and_release_nuget
+    build_and_release_nuget = var.build_and_release_nuget,
+    # Use first service name as the convention for the project name.
+    # Assuming it represents the whole repository.
+    sonarcloud_project = "Karnov-Group-Norway_${var.funcs[0].service_name}"
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"

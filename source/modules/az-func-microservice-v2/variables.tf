@@ -27,8 +27,8 @@ variable "sln_path" {
 
 variable "funcs" {
   type = list(object({
-    service_name = string
-    func_path    = string
+    service_name       = string
+    func_path          = string
   }))
   default = []
 }

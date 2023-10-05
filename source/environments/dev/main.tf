@@ -80,7 +80,7 @@ module "microservice_kDashboardBff" {
   funcs = [
     {
       service_name = "kDashboardBff",
-      func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj"
+      func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
     }
   ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"

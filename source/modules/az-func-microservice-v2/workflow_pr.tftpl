@@ -1,4 +1,4 @@
-name: Pull Request
+name: Pull Request: ${service_name}
 run-name: Building PR 🛠️
 
 on:
@@ -21,7 +21,7 @@ jobs:
       build_and_release_nuget: ${build_and_release_nuget}
       azure_func_name: ${service_name}-func-Dev-k
       enable_sonarcloud: ${"$"}{{ !contains(github.event.pull_request.labels.*.name, 'skip-code-analysis') }}
-      sonarcloud_project: Karnov-Group-Norway_${service_name}
+      sonarcloud_project: ${sonarcloud_project}
     secrets:
       BINARY_REPO_BLOB_STORAGE_CONN_STR: ${"$"}{{ secrets.BINARY_REPO_BLOB_STORAGE_CONN_STR }}
       SONARCLOUD_TOKEN: ${"$"}{{ secrets.SONAR_TOKEN }}
