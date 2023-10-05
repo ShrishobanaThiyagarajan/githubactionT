@@ -75,20 +75,38 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
 }
 
 module "microservice_kDashboardBff" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "kDashboardBff"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "kDashboardBff"
+  funcs = [
+    {
+      service_name = "kDashboardBff",
+      func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj"
+    }
+  ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
 module "UserEventKafkaWriter" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "UserEventKafkaWriter"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "UserEventKafkaWriter"
+  funcs = [
+    {
+      service_name = "UserEventKafkaWriter",
+      func_path    = "./source/KarnovN.UserEventKafkaWriter.Func/KarnovN.UserEventKafkaWriter.Func.csproj"
+    }
+  ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
 module "DocumentPublishedKafkaWriter" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "DocumentPublishedKafkaWriter"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "DocumentPublishedKafkaWriter"
+  funcs = [
+    {
+      service_name = "DocumentPublishedKafkaWriter",
+      func_path    = "./source/KarnovN.DocumentPublishedKafkaWriter.Func/KarnovN.DocumentPublishedKafkaWriter.Func.csproj"
+    }
+  ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
@@ -107,8 +125,14 @@ data "azurerm_key_vault_secret" "hubspotintegration_sonarcloud_token" {
 
 
 module "microservice_Order" {
-  source                   = "../../modules/az-func-microservice-v2"
-  service_name             = "Order"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Order"
+  funcs = [
+    {
+      service_name = "Order",
+      func_path    = "./source/Order.Func/Order.Func.csproj"
+    }
+  ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
   # provisiong github repo with environments and secrets
@@ -124,8 +148,14 @@ module "microservice_Order" {
 }
 
 module "microservice_HubSpotIntegration" {
-  source                           = "../../modules/az-func-microservice-v2"
-  service_name                     = "HubSpotIntegration"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "HubSpotIntegration"
+  funcs = [
+    {
+      service_name = "HubSpotIntegration",
+      func_path    = "./source/KarnovN.HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+    }
+  ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
@@ -146,8 +176,14 @@ data "azurerm_key_vault_secret" "alerter_sonarcloud_token" {
 }
 
 module "microservice_Alerter" {
-  source                           = "../../modules/az-func-microservice-v2"
-  service_name                     = "Alerter"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Alerter"
+  funcs = [
+    {
+      service_name = "Alerter",
+      func_path    = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
+    }
+  ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
@@ -167,8 +203,14 @@ data "azurerm_key_vault_secret" "documentlog_sonarcloud_token" {
 }
 
 module "microservice_DocumentLog" {
-  source                           = "../../modules/az-func-microservice-v2"
-  service_name                     = "DocumentLog"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "DocumentLog"
+  funcs = [
+    {
+      service_name = "DocumentLog",
+      func_path    = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+    }
+  ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
@@ -189,8 +231,14 @@ data "azurerm_key_vault_secret" "salesinfo_sonarcloud_token" {
 }
 
 module "microservice_SalesInfo" {
-  source                           = "../../modules/az-func-microservice-v2"
-  service_name                     = "SalesInfo"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "SalesInfo"
+  funcs = [
+    {
+      service_name = "SalesInfo",
+      func_path    = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
+    }
+  ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
@@ -210,8 +258,14 @@ data "azurerm_key_vault_secret" "mondayintegration_sonarcloud_token" {
 }
 
 module "microservice_MondayIntegration" {
-  source                           = "../../modules/az-func-microservice-v2"
-  service_name                     = "MondayIntegration"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "MondayIntegration"
+  funcs = [
+    {
+      service_name = "MondayIntegration",
+      func_path    = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
+    }
+  ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
@@ -231,8 +285,14 @@ data "azurerm_key_vault_secret" "userevents_sonarcloud_token" {
 }
 
 module "microservice_UserEvents" {
-  source                           = "../../modules/az-func-microservice-v2"
-  service_name                     = "UserEvents"
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "UserEvents"
+  funcs = [
+    {
+      service_name = "UserEvents",
+      func_path    = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
+    }
+  ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
@@ -245,6 +305,42 @@ module "microservice_UserEvents" {
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
+
+data "azurerm_key_vault_secret" "user_sonarcloud_token" {
+  name         = "UserSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_User" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "User"
+  funcs = [
+    {
+      service_name = "User",
+      func_path    = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
+    },
+    {
+      service_name = "UserAdmin",
+      func_path    = "./source/KarnovN.UserAdmin.Func/KarnovN.UserAdmin.Func.csproj"
+    },
+    {
+      service_name = "UserProperties",
+      func_path    = "./source/KarnovN.UserProperties.Func/KarnovN.UserProperties.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./User.sln"
+  #func_path                        = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.userevents_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 
 output "lovdata_statistics_sftp" {
   sensitive = true

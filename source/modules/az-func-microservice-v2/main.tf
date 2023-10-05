@@ -109,14 +109,14 @@ resource "github_repository_file" "appsettings" {
 }
 
 resource "github_repository_file" "workflow_pr" {
-  count      = var.provision_repository ? 1 : 0
-  repository = github_repository.microservice_repository[count.index].name
+  count      = var.provision_repository ? length(var.funcs) : 0
+  repository = github_repository.microservice_repository[0].name
   branch     = "main"
-  file       = ".github/workflows/pr.yml"
+  file       = ".github/workflows/pr-${var.funcs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", {
-    service_name            = var.service_name,
+    service_name            = var.funcs[count.index].service_name,
     sln_path                = var.sln_path,
-    func_path               = var.func_path,
+    func_path               = var.funcs[count.index].func_path,
     build_and_release_nuget = var.build_and_release_nuget
   })
   commit_message      = "Managed by kPlatform"
@@ -158,7 +158,8 @@ resource "github_repository_file" "workflow_deploy" {
 }
 
 resource "azurerm_service_plan" "service_plan" {
-  name                = "${var.service_name}-func-sp-${lower(var.environment_name)}-k"
+  count               = length(var.funcs)
+  name                = "${var.funcs[count.index].service_name}-func-sp-${lower(var.environment_name)}-k"
   resource_group_name = "functions-${var.environment_name}-k"
   location            = data.azurerm_resource_group.func_resource_group.location
   os_type             = "Windows"
@@ -188,13 +189,14 @@ resource "azurerm_windows_function_app" "windows_func" {
     ]
   }
 
-  name                = "${var.service_name}-func-${lower(var.environment_name)}-k"
+  count               = length(var.funcs)
+  name                = "${var.funcs[count.index].service_name}-func-${lower(var.environment_name)}-k"
   resource_group_name = data.azurerm_resource_group.func_resource_group.name
   location            = data.azurerm_resource_group.func_resource_group.location
 
   storage_account_name       = data.azurerm_storage_account.func_storage_account.name
   storage_account_access_key = data.azurerm_storage_account.func_storage_account.primary_access_key
-  service_plan_id            = azurerm_service_plan.service_plan.id
+  service_plan_id            = azurerm_service_plan.service_plan[count.index].id
 
   site_config {}
 
