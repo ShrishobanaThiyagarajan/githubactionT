@@ -25,11 +25,6 @@ variable "sln_path" {
   default = ""
 }
 
-variable "func_path" {
-  type    = string
-  default = ""
-}
-
 variable "funcs" {
   type = list(object({
     service_name = string

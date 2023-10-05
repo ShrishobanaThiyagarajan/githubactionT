@@ -139,7 +139,6 @@ module "microservice_Order" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./Order.sln"
-  func_path                        = "./source/Order.Func/KarnovN.Order.Func.csproj"
   sonarcloud_token                 = data.azurerm_key_vault_secret.order_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
@@ -161,7 +160,6 @@ module "microservice_HubSpotIntegration" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./HubSpotIntegration.sln"
-  func_path                        = "./source/HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
   build_and_release_nuget          = false
   sonarcloud_token                 = data.azurerm_key_vault_secret.hubspotintegration_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
@@ -189,7 +187,6 @@ module "microservice_Alerter" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./Alerter.sln"
-  func_path                        = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
   sonarcloud_token                 = data.azurerm_key_vault_secret.alerter_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
@@ -216,7 +213,6 @@ module "microservice_DocumentLog" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./DocumentLog.sln"
-  func_path                        = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
   build_and_release_nuget          = false
   sonarcloud_token                 = data.azurerm_key_vault_secret.documentlog_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
@@ -244,7 +240,6 @@ module "microservice_SalesInfo" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./SalesInfo.sln"
-  func_path                        = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
   sonarcloud_token                 = data.azurerm_key_vault_secret.salesinfo_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
@@ -271,7 +266,6 @@ module "microservice_MondayIntegration" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./MondayIntegration.sln"
-  func_path                        = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
   sonarcloud_token                 = data.azurerm_key_vault_secret.mondayintegration_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
@@ -298,7 +292,6 @@ module "microservice_UserEvents" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./UserEvents.sln"
-  func_path                        = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
   sonarcloud_token                 = data.azurerm_key_vault_secret.userevents_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
@@ -333,7 +326,6 @@ module "microservice_User" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./User.sln"
-  #func_path                        = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
   sonarcloud_token                 = data.azurerm_key_vault_secret.userevents_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
