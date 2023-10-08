@@ -234,3 +234,24 @@ module "microservice_UserEvents" {
     }
   ]
 }
+
+module "microservice_User" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "User"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "User",
+      func_path    = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
+    },
+    {
+      service_name = "UserAdmin",
+      func_path    = "./source/KarnovN.UserAdmin.Func/KarnovN.UserAdmin.Func.csproj"
+    },
+    {
+      service_name = "UserProperties",
+      func_path    = "./source/KarnovN.UserProperties.Func/KarnovN.UserProperties.Func.csproj"
+    }
+  ]
+}
