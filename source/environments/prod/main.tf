@@ -110,6 +110,12 @@ module "microservice_kDashboardBff" {
   service_name             = "kDashboardBff"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "kDashboardBff",
+      func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
+    }
+  ]
 }
 
 module "UserEventKafkaWriter" {
@@ -117,6 +123,12 @@ module "UserEventKafkaWriter" {
   service_name             = "UserEventKafkaWriter"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "UserEventKafkaWriter",
+      func_path    = "./source/KarnovN.UserEventKafkaWriter.Func/KarnovN.UserEventKafkaWriter.Func.csproj"
+    }
+  ]
 }
 
 module "DocumentPublishedKafkaWriter" {
@@ -124,6 +136,12 @@ module "DocumentPublishedKafkaWriter" {
   service_name             = "DocumentPublishedKafkaWriter"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "DocumentPublishedKafkaWriter",
+      func_path    = "./source/KarnovN.DocumentPublishedKafkaWriter.Func/KarnovN.DocumentPublishedKafkaWriter.Func.csproj"
+    }
+  ]
 }
 
 module "microservice_Order" {
@@ -131,13 +149,25 @@ module "microservice_Order" {
   service_name             = "Order"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "Order",
+      func_path    = "./source/Order.Func/KarnovN.Order.Func.csproj"
+    }
+  ]
 }
-  
+
 module "microservice_HubSpotIntegration" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "HubSpotIntegration"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "HubSpotIntegration",
+      func_path    = "./source/KarnovN.HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+    }
+  ]
 }
 
 module "microservice_Alerter" {
@@ -145,6 +175,12 @@ module "microservice_Alerter" {
   service_name             = "Alerter"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "Alerter",
+      func_path    = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
+    }
+  ]
 }
 
 module "microservice_DocumentLog" {
@@ -152,6 +188,12 @@ module "microservice_DocumentLog" {
   service_name             = "DocumentLog"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "DocumentLog",
+      func_path    = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+    }
+  ]
 }
 
 module "microservice_SalesInfo" {
@@ -159,6 +201,12 @@ module "microservice_SalesInfo" {
   service_name             = "SalesInfo"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "SalesInfo",
+      func_path    = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
+    }
+  ]
 }
 
 module "microservice_MondayIntegration" {
@@ -166,6 +214,12 @@ module "microservice_MondayIntegration" {
   service_name             = "MondayIntegration"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "MondayIntegration",
+      func_path    = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
+    }
+  ]
 }
 
 module "microservice_UserEvents" {
@@ -173,4 +227,10 @@ module "microservice_UserEvents" {
   service_name             = "UserEvents"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "UserEvents",
+      func_path    = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
+    }
+  ]
 }
