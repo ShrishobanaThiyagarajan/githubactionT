@@ -255,3 +255,24 @@ module "microservice_User" {
     }
   ]
 }
+
+module "microservice_Statistics" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Statistics"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "Statistics",
+      func_path    = "./source/KarnovN.Statistics.Func/KarnovN.Statistics.Func.csproj"
+    },
+    {
+      service_name = "StatisticsAggregate",
+      func_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
+    },
+    {
+      service_name = "StatisticsLovdataProducer",
+      func_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
+    }
+  ]
+}
