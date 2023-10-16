@@ -333,6 +333,39 @@ module "microservice_User" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+data "azurerm_key_vault_secret" "statistics_sonarcloud_token" {
+  name         = "StatisticsSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_Statistics" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Statistics"
+  funcs = [
+    {
+      service_name = "Statistics",
+      func_path    = "./source/KarnovN.Statistics.Func/KarnovN.Statistics.Func.csproj"
+    },
+    {
+      service_name = "StatisticsAggregate",
+      func_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
+    },
+    {
+      service_name = "StatisticsProducers",
+      func_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./Statistics.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.statistics_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
 
 output "lovdata_statistics_sftp" {
   sensitive = true
