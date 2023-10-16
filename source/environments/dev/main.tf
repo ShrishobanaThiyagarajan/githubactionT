@@ -351,7 +351,7 @@ module "microservice_Statistics" {
       func_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
     },
     {
-      service_name = "StatisticsProducers",
+      service_name = "StatisticsLovdataProducer",
       func_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
     }
   ]
