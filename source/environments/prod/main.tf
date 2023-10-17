@@ -276,3 +276,17 @@ module "microservice_Statistics" {
     }
   ]
 }
+
+module "microservice_LovdataImport" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "LovdataImport"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "LovdataImport",
+      func_path    = "./source/KarnovN.LovdataImport.Func/KarnovN.LovdataImport.Func.csproj"
+    }
+  ]
+}
+
