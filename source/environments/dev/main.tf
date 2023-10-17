@@ -74,6 +74,11 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
   value        = "3875956428"
 }
 
+data "azurerm_key_vault_secret" "kdashboardbff_sonarcloud_token" {
+  name         = "kDashboardBffSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
 module "microservice_kDashboardBff" {
   source       = "../../modules/az-func-microservice-v2"
   service_name = "kDashboardBff"
@@ -83,9 +88,18 @@ module "microservice_kDashboardBff" {
       func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
     }
   ]
-  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
-  environment_name         = var.environment_name
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./kDashboard.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.kdashboardbff_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
+
 module "UserEventKafkaWriter" {
   source       = "../../modules/az-func-microservice-v2"
   service_name = "UserEventKafkaWriter"
@@ -98,6 +112,7 @@ module "UserEventKafkaWriter" {
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
 }
+
 module "DocumentPublishedKafkaWriter" {
   source       = "../../modules/az-func-microservice-v2"
   service_name = "DocumentPublishedKafkaWriter"
@@ -121,8 +136,6 @@ data "azurerm_key_vault_secret" "hubspotintegration_sonarcloud_token" {
   name         = "HubSpotIntegrationSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
-
-
 
 module "microservice_Order" {
   source       = "../../modules/az-func-microservice-v2"
