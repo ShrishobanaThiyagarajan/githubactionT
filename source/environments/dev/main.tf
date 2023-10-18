@@ -407,6 +407,28 @@ module "microservice_LovdataImport" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+# TODO: skal dette hete Microservice?
+#module "microservice_kPortal" {
+#  source                         = "../../modules/az-appservice"
+#  service_name                   = "kPortal"
+#  appservice_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  # TODO: add SKU for service_plan
+#  environment_name = var.environment_name
+#  apps = [
+#    {
+#      service_name    = "kPortal"
+#      appservice_path = "./source/KPortal.Web/KPortal.Web.csproj"
+#    }
+#  ]
+#  provision_repository             = true
+#  sln_path                         = "./kPortal.sln"
+#  sonarcloud_token                 = data.azurerm_key_vault_secret.lovdataimport_sonarcloud_token.value
+#  azure_credentials_test           = var.azure_credentials_test
+#  azure_credentials_prod           = var.azure_credentials_prod
+#  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+#  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+#}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
