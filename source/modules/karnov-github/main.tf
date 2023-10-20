@@ -107,7 +107,7 @@ resource "github_repository_file" "workflow_pr" {
   content = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", {
     service_name            = var.funcs[count.index].service_name,
     sln_path                = var.sln_path,
-    func_path               = var.funcs[count.index].func_path,
+    func_path               = var.funcs[count.index].proj_path,
     build_and_release_nuget = var.build_and_release_nuget,
     # Use first service name as the convention for the project name.
     # Assuming it represents the whole repository.
@@ -127,7 +127,7 @@ resource "github_repository_file" "workflow_release" {
   content = templatefile("../../modules/az-func-microservice-v2/workflow_release.tftpl", {
     service_name            = var.funcs[count.index].service_name,
     sln_path                = var.sln_path,
-    func_path               = var.funcs[count.index].func_path,
+    func_path               = var.funcs[count.index].proj_path,
     build_and_release_nuget = var.build_and_release_nuget,
     # Use first service name as the convention for the project name.
     # Assuming it represents the whole repository.
@@ -146,7 +146,7 @@ resource "github_repository_file" "workflow_deploy" {
   file       = ".github/workflows/deploy-${var.funcs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", {
     service_name = var.funcs[count.index].service_name,
-    func_path    = var.funcs[count.index].func_path
+    func_path    = var.funcs[count.index].proj_path
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"

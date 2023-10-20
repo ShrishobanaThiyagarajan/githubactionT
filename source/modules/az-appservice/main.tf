@@ -26,18 +26,31 @@ module "repository" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
-#data "azurerm_resource_group" "appservice_resource_group" {
-#  name = var.appservice_resource_group_name
-#}
+data "azurerm_resource_group" "appservice_resource_group" {
+  name = var.appservice_resource_group_name
+}
 
-#resource "azurerm_service_plan" "service_plan" {
-#  count               = length(var.apps)
-#  name                = "${var.apps[count.index].service_name}-func-sp-${lower(var.environment_name)}-k"
-#  resource_group_name = "functions-${var.environment_name}-k"
-#  location            = data.azurerm_resource_group.appservice_resource_group.location
-#  os_type             = "Windows"
-#  sku_name            = var.service_plan_sku
-#  tags = {
-#    environment = var.environment_name
-#  }
-#}
+resource "azurerm_service_plan" "service_plan" {
+  count                  = length(var.apps)
+  name                   = var.appservice_serviceplan_name != "" ? var.appservice_serviceplan_name : "${lower(var.service_name)}-sp-${lower(var.environment_name)}-k"
+  resource_group_name    = data.azurerm_resource_group.appservice_resource_group.name
+  location               = data.azurerm_resource_group.appservice_resource_group.location
+  os_type                = "Windows"
+  sku_name               = var.service_plan_sku
+  zone_balancing_enabled = false
+  worker_count           = 1
+  timeouts {}
+  tags = {
+    environment = var.environment_name
+  }
+}
+
+resource "azurerm_windows_web_app" "windows_appservice" {
+  count               = length(var.apps)
+  name                = var.appservice_name != "" ? var.appservice_name : "${lower(var.service_name)}-${lower(var.environment_name)}-k"
+  resource_group_name = data.azurerm_resource_group.appservice_resource_group.name
+  location            = data.azurerm_resource_group.appservice_resource_group.location
+  service_plan_id     = azurerm_service_plan.service_plan[count.index].id
+
+  site_config {}
+}

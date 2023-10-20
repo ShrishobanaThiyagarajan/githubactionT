@@ -85,7 +85,7 @@ module "microservice_kDashboardBff" {
   funcs = [
     {
       service_name = "kDashboardBff",
-      func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
+      proj_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -107,7 +107,7 @@ module "UserEventKafkaWriter" {
   funcs = [
     {
       service_name = "UserEventKafkaWriter",
-      func_path    = "./source/KarnovN.UserEventKafkaWriter.Func/KarnovN.UserEventKafkaWriter.Func.csproj"
+      proj_path    = "./source/KarnovN.UserEventKafkaWriter.Func/KarnovN.UserEventKafkaWriter.Func.csproj"
     }
   ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
@@ -120,7 +120,7 @@ module "DocumentPublishedKafkaWriter" {
   funcs = [
     {
       service_name = "DocumentPublishedKafkaWriter",
-      func_path    = "./source/KarnovN.DocumentPublishedKafkaWriter.Func/KarnovN.DocumentPublishedKafkaWriter.Func.csproj"
+      proj_path    = "./source/KarnovN.DocumentPublishedKafkaWriter.Func/KarnovN.DocumentPublishedKafkaWriter.Func.csproj"
     }
   ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
@@ -144,7 +144,7 @@ module "microservice_Order" {
   funcs = [
     {
       service_name = "Order",
-      func_path    = "./source/Order.Func/KarnovN.Order.Func.csproj"
+      proj_path    = "./source/Order.Func/KarnovN.Order.Func.csproj"
     }
   ]
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
@@ -166,7 +166,7 @@ module "microservice_HubSpotIntegration" {
   funcs = [
     {
       service_name = "HubSpotIntegration",
-      func_path    = "./source/KarnovN.HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+      proj_path    = "./source/KarnovN.HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -193,7 +193,7 @@ module "microservice_Alerter" {
   funcs = [
     {
       service_name = "Alerter",
-      func_path    = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
+      proj_path    = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -219,7 +219,7 @@ module "microservice_DocumentLog" {
   funcs = [
     {
       service_name = "DocumentLog",
-      func_path    = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+      proj_path    = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -246,7 +246,7 @@ module "microservice_SalesInfo" {
   funcs = [
     {
       service_name = "SalesInfo",
-      func_path    = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
+      proj_path    = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -272,7 +272,7 @@ module "microservice_MondayIntegration" {
   funcs = [
     {
       service_name = "MondayIntegration",
-      func_path    = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
+      proj_path    = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -298,7 +298,7 @@ module "microservice_UserEvents" {
   funcs = [
     {
       service_name = "UserEvents",
-      func_path    = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
+      proj_path    = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -324,15 +324,15 @@ module "microservice_User" {
   funcs = [
     {
       service_name = "User",
-      func_path    = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
+      proj_path    = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
     },
     {
       service_name = "UserAdmin",
-      func_path    = "./source/KarnovN.UserAdmin.Func/KarnovN.UserAdmin.Func.csproj"
+      proj_path    = "./source/KarnovN.UserAdmin.Func/KarnovN.UserAdmin.Func.csproj"
     },
     {
       service_name = "UserProperties",
-      func_path    = "./source/KarnovN.UserProperties.Func/KarnovN.UserProperties.Func.csproj"
+      proj_path    = "./source/KarnovN.UserProperties.Func/KarnovN.UserProperties.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -358,15 +358,15 @@ module "microservice_Statistics" {
   funcs = [
     {
       service_name = "Statistics",
-      func_path    = "./source/KarnovN.Statistics.Func/KarnovN.Statistics.Func.csproj"
+      proj_path    = "./source/KarnovN.Statistics.Func/KarnovN.Statistics.Func.csproj"
     },
     {
       service_name = "StatisticsAggregate",
-      func_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
+      proj_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
     },
     {
       service_name = "StatisticsLovdataProducer",
-      func_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
+      proj_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -392,7 +392,7 @@ module "microservice_LovdataImport" {
   funcs = [
     {
       service_name = "LovdataImport",
-      func_path    = "./source/KarnovN.LovdataImport.Func/KarnovN.LovdataImport.Func.csproj"
+      proj_path    = "./source/KarnovN.LovdataImport.Func/KarnovN.LovdataImport.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
@@ -407,27 +407,28 @@ module "microservice_LovdataImport" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
-# TODO: skal dette hete Microservice?
-#module "microservice_kPortal" {
-#  source                         = "../../modules/az-appservice"
-#  service_name                   = "kPortal"
-#  appservice_resource_group_name = "functions-${lower(var.environment_name)}-k"
+# TODO: using this as playground for appservice to learn how to automate this setup
+module "microservice_AppServicePlayground" {
+  source                         = "../../modules/az-appservice"
+  service_name                   = "AppServicePlayground"
+  appservice_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  service_plan_sku               = "B1"
   # TODO: add SKU for service_plan
-#  environment_name = var.environment_name
-#  apps = [
-#    {
-#      service_name    = "kPortal"
-#      appservice_path = "./source/KPortal.Web/KPortal.Web.csproj"
-#    }
-#  ]
-#  provision_repository             = true
-#  sln_path                         = "./kPortal.sln"
-#  sonarcloud_token                 = data.azurerm_key_vault_secret.lovdataimport_sonarcloud_token.value
-#  azure_credentials_test           = var.azure_credentials_test
-#  azure_credentials_prod           = var.azure_credentials_prod
-#  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
-#  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
-#}
+  environment_name = var.environment_name
+  apps = [
+    {
+      service_name = "AppServicePlayground"
+      proj_path    = "./source/AppServicePlayground.Web/AppServicePlayground.Web.csproj"
+    }
+  ]
+  provision_repository             = true
+  sln_path                         = "./AppServicePlayground.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.lovdataimport_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
 
 output "lovdata_statistics_sftp" {
   sensitive = true

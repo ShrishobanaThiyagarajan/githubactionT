@@ -113,7 +113,7 @@ module "microservice_kDashboardBff" {
   funcs = [
     {
       service_name = "kDashboardBff",
-      func_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
+      proj_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
     }
   ]
 }
@@ -126,7 +126,7 @@ module "UserEventKafkaWriter" {
   funcs = [
     {
       service_name = "UserEventKafkaWriter",
-      func_path    = "./source/KarnovN.UserEventKafkaWriter.Func/KarnovN.UserEventKafkaWriter.Func.csproj"
+      proj_path    = "./source/KarnovN.UserEventKafkaWriter.Func/KarnovN.UserEventKafkaWriter.Func.csproj"
     }
   ]
 }
@@ -139,7 +139,7 @@ module "DocumentPublishedKafkaWriter" {
   funcs = [
     {
       service_name = "DocumentPublishedKafkaWriter",
-      func_path    = "./source/KarnovN.DocumentPublishedKafkaWriter.Func/KarnovN.DocumentPublishedKafkaWriter.Func.csproj"
+      proj_path    = "./source/KarnovN.DocumentPublishedKafkaWriter.Func/KarnovN.DocumentPublishedKafkaWriter.Func.csproj"
     }
   ]
 }
@@ -152,7 +152,7 @@ module "microservice_Order" {
   funcs = [
     {
       service_name = "Order",
-      func_path    = "./source/Order.Func/KarnovN.Order.Func.csproj"
+      proj_path    = "./source/Order.Func/KarnovN.Order.Func.csproj"
     }
   ]
 }
@@ -165,7 +165,7 @@ module "microservice_HubSpotIntegration" {
   funcs = [
     {
       service_name = "HubSpotIntegration",
-      func_path    = "./source/KarnovN.HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
+      proj_path    = "./source/KarnovN.HubSpotIntegration.Func/KarnovN.HubSpotIntegration.Func.csproj"
     }
   ]
 }
@@ -178,7 +178,7 @@ module "microservice_Alerter" {
   funcs = [
     {
       service_name = "Alerter",
-      func_path    = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
+      proj_path    = "./source/KarnovN.Alerter.Func/KarnovN.Alerter.Func.csproj"
     }
   ]
 }
@@ -191,7 +191,7 @@ module "microservice_DocumentLog" {
   funcs = [
     {
       service_name = "DocumentLog",
-      func_path    = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
+      proj_path    = "./source/KarnovN.DocumentLog.Func/KarnovN.DocumentLog.Func.csproj"
     }
   ]
 }
@@ -204,7 +204,7 @@ module "microservice_SalesInfo" {
   funcs = [
     {
       service_name = "SalesInfo",
-      func_path    = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
+      proj_path    = "./source/KarnovN.SalesInfo.Func/KarnovN.SalesInfo.Func.csproj"
     }
   ]
 }
@@ -217,7 +217,7 @@ module "microservice_MondayIntegration" {
   funcs = [
     {
       service_name = "MondayIntegration",
-      func_path    = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
+      proj_path    = "./source/KarnovN.MondayIntegration.Func/KarnovN.MondayIntegration.Func.csproj"
     }
   ]
 }
@@ -230,7 +230,7 @@ module "microservice_UserEvents" {
   funcs = [
     {
       service_name = "UserEvents",
-      func_path    = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
+      proj_path    = "./source/KarnovN.UserEvents.Func/KarnovN.UserEvents.Func.csproj"
     }
   ]
 }
@@ -243,15 +243,15 @@ module "microservice_User" {
   funcs = [
     {
       service_name = "User",
-      func_path    = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
+      proj_path    = "./source/KarnovN.User.Func/KarnovN.User.Func.csproj"
     },
     {
       service_name = "UserAdmin",
-      func_path    = "./source/KarnovN.UserAdmin.Func/KarnovN.UserAdmin.Func.csproj"
+      proj_path    = "./source/KarnovN.UserAdmin.Func/KarnovN.UserAdmin.Func.csproj"
     },
     {
       service_name = "UserProperties",
-      func_path    = "./source/KarnovN.UserProperties.Func/KarnovN.UserProperties.Func.csproj"
+      proj_path    = "./source/KarnovN.UserProperties.Func/KarnovN.UserProperties.Func.csproj"
     }
   ]
 }
@@ -264,15 +264,15 @@ module "microservice_Statistics" {
   funcs = [
     {
       service_name = "Statistics",
-      func_path    = "./source/KarnovN.Statistics.Func/KarnovN.Statistics.Func.csproj"
+      proj_path    = "./source/KarnovN.Statistics.Func/KarnovN.Statistics.Func.csproj"
     },
     {
       service_name = "StatisticsAggregate",
-      func_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
+      proj_path    = "./source/KarnovN.Statistics.Aggregate.Func/KarnovN.Statistics.Aggregate.Func.csproj"
     },
     {
       service_name = "StatisticsLovdataProducer",
-      func_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
+      proj_path    = "./source/KarnovN.StatisticsLovdataProducer.Func/KarnovN.StatisticsLovdataProducer.Func.csproj"
     }
   ]
 }
@@ -285,7 +285,7 @@ module "microservice_LovdataImport" {
   funcs = [
     {
       service_name = "LovdataImport",
-      func_path    = "./source/KarnovN.LovdataImport.Func/KarnovN.LovdataImport.Func.csproj"
+      proj_path    = "./source/KarnovN.LovdataImport.Func/KarnovN.LovdataImport.Func.csproj"
     }
   ]
 }
