@@ -421,6 +421,7 @@ module "microservice_AppServicePlayground" {
       proj_path    = "./source/AppServicePlayground.Web/AppServicePlayground.Web.csproj"
     }
   ]
+  github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./AppServicePlayground.sln"
   sonarcloud_token                 = data.azurerm_key_vault_secret.lovdataimport_sonarcloud_token.value
