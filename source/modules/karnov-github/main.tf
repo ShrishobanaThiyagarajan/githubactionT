@@ -100,18 +100,19 @@ resource "github_repository_file" "appsettings" {
 }
 
 resource "github_repository_file" "workflow_pr" {
-  count      = var.provision_repository ? length(var.funcs) : 0
+  count      = var.provision_repository ? length(var.projs) : 0
   repository = github_repository.microservice_repository[0].name
   branch     = "main"
-  file       = ".github/workflows/pr-${var.funcs[count.index].service_name}.yml"
+  file       = ".github/workflows/pr-${var.projs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_pr.tftpl", {
-    service_name            = var.funcs[count.index].service_name,
+    service_name            = var.projs[count.index].service_name,
     sln_path                = var.sln_path,
-    func_path               = var.funcs[count.index].proj_path,
+    func_path               = var.projs[count.index].proj_path,
     build_and_release_nuget = var.build_and_release_nuget,
     # Use first service name as the convention for the project name.
     # Assuming it represents the whole repository.
-    sonarcloud_project = "Karnov-Group-Norway_${var.funcs[0].service_name}"
+    sonarcloud_project = "Karnov-Group-Norway_${var.projs[0].service_name}",
+    apptype            = var.projs[count.index].apptype
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
@@ -120,18 +121,18 @@ resource "github_repository_file" "workflow_pr" {
 }
 
 resource "github_repository_file" "workflow_release" {
-  count      = var.provision_repository ? length(var.funcs) : 0
+  count      = var.provision_repository ? length(var.projs) : 0
   repository = github_repository.microservice_repository[0].name
   branch     = "main"
-  file       = ".github/workflows/release-${var.funcs[count.index].service_name}.yml"
+  file       = ".github/workflows/release-${var.projs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_release.tftpl", {
-    service_name            = var.funcs[count.index].service_name,
+    service_name            = var.projs[count.index].service_name,
     sln_path                = var.sln_path,
-    func_path               = var.funcs[count.index].proj_path,
+    func_path               = var.projs[count.index].proj_path,
     build_and_release_nuget = var.build_and_release_nuget,
     # Use first service name as the convention for the project name.
     # Assuming it represents the whole repository.
-    sonarcloud_project = "Karnov-Group-Norway_${var.funcs[0].service_name}"
+    sonarcloud_project = "Karnov-Group-Norway_${var.projs[0].service_name}"
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
@@ -140,13 +141,13 @@ resource "github_repository_file" "workflow_release" {
 }
 
 resource "github_repository_file" "workflow_deploy" {
-  count      = var.provision_repository ? length(var.funcs) : 0
+  count      = var.provision_repository ? length(var.projs) : 0
   repository = github_repository.microservice_repository[0].name
   branch     = "main"
-  file       = ".github/workflows/deploy-${var.funcs[count.index].service_name}.yml"
+  file       = ".github/workflows/deploy-${var.projs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", {
-    service_name = var.funcs[count.index].service_name,
-    func_path    = var.funcs[count.index].proj_path
+    service_name = var.projs[count.index].service_name,
+    func_path    = var.projs[count.index].proj_path
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"

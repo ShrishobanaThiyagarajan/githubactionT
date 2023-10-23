@@ -16,7 +16,7 @@ module "repository" {
   provision_repository             = var.provision_repository
   service_name                     = var.service_name
   github_token                     = var.github_token
-  funcs                            = var.funcs
+  projs                            = var.funcs
   build_and_release_nuget          = var.build_and_release_nuget
   sln_path                         = var.sln_path
   sonarcloud_token                 = var.sonarcloud_token

@@ -16,7 +16,7 @@ module "repository" {
   provision_repository             = var.provision_repository
   service_name                     = var.service_name
   github_token                     = var.github_token
-  funcs                            = var.apps
+  projs                            = var.apps
   build_and_release_nuget          = false
   sln_path                         = var.sln_path
   sonarcloud_token                 = var.sonarcloud_token
@@ -46,6 +46,12 @@ resource "azurerm_service_plan" "service_plan" {
 }
 
 resource "azurerm_windows_web_app" "windows_appservice" {
+  lifecycle {
+    ignore_changes = [
+      logs,
+    ]
+  }
+
   count               = length(var.apps)
   name                = var.appservice_name != "" ? var.appservice_name : "${lower(var.service_name)}-${lower(var.environment_name)}-k"
   resource_group_name = data.azurerm_resource_group.appservice_resource_group.name

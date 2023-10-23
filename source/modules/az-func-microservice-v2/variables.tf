@@ -29,6 +29,7 @@ variable "funcs" {
   type = list(object({
     service_name = string
     proj_path    = string
+    apptype      = optional(string, "func")
   }))
   default = []
 }

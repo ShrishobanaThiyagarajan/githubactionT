@@ -3,14 +3,14 @@ variable "service_name" {
 }
 
 variable "appservice_name" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Override the actual name of the appservice instead of using the conventional"
 }
 
 variable "appservice_serviceplan_name" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Override the actual name of the appservice instead of using the conventional"
 }
 
@@ -42,6 +42,7 @@ variable "apps" {
   type = list(object({
     service_name = string
     proj_path    = string
+    apptype      = optional(string, "appservice")
   }))
   default = []
 }

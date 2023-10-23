@@ -11,10 +11,11 @@ variable "provision_repository" {
   type = bool
 }
 
-variable "funcs" {
+variable "projs" {
   type = list(object({
     service_name = string
     proj_path    = string
+    apptype      = string
   }))
   default = []
 }
