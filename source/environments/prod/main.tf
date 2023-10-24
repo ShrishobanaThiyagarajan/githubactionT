@@ -290,3 +290,17 @@ module "microservice_LovdataImport" {
   ]
 }
 
+module "microservice_KPortal" {
+  source                         = "../../modules/az-appservice"
+  service_name                   = "KPortal"
+  appservice_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  service_plan_sku               = "P1v2"
+  environment_name = var.environment_name
+  apps = [
+    {
+      service_name   = "KPortal"
+      proj_path      = "./source/KPortal.Web/KPortal.Web.csproj",
+    }
+  ]
+}
+
