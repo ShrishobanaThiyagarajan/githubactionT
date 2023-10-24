@@ -148,7 +148,8 @@ resource "github_repository_file" "workflow_deploy" {
   file       = ".github/workflows/deploy-${var.projs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", {
     service_name = var.projs[count.index].service_name,
-    func_path    = var.projs[count.index].proj_path
+    func_path    = var.projs[count.index].proj_path,
+    apptype      = var.projs[count.index].apptype,
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
