@@ -112,7 +112,8 @@ resource "github_repository_file" "workflow_pr" {
     # Use first service name as the convention for the project name.
     # Assuming it represents the whole repository.
     sonarcloud_project = "Karnov-Group-Norway_${var.projs[0].service_name}",
-    apptype            = var.projs[count.index].apptype
+    apptype            = var.projs[count.index].apptype,
+    azure_webapp_name  = var.projs[count.index].apptype == "appservice" ? "${lower(var.projs[count.index].service_name)}-dev-k" : "${lower(var.projs[count.index].service_name)}-func-Dev-k"
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
@@ -146,8 +147,8 @@ resource "github_repository_file" "workflow_deploy" {
   branch     = "main"
   file       = ".github/workflows/deploy-${var.projs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", {
-    service_name   = var.projs[count.index].service_name,
-    func_path      = var.projs[count.index].proj_path
+    service_name = var.projs[count.index].service_name,
+    func_path    = var.projs[count.index].proj_path
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"

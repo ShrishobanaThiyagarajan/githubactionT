@@ -19,7 +19,7 @@ jobs:
       func_proj_path: ${func_path}
       release_asset_name: ${service_name}
       build_and_release_nuget: ${build_and_release_nuget}
-      azure_func_name: ${service_name}-func-Dev-k
+      azure_func_name: ${azure_webapp_name}
       enable_sonarcloud: ${"$"}{{ !contains(github.event.pull_request.labels.*.name, 'skip-code-analysis') }}
       sonarcloud_project: ${sonarcloud_project}
       apptype: ${apptype}
