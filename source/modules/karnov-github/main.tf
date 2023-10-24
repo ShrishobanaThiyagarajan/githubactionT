@@ -8,10 +8,10 @@ terraform {
 }
 
 # Configure the GitHub Provider
-provider "github" {
-  token = var.github_token
-  owner = "Karnov-Group-Norway"
-}
+#provider "github" {
+#  token = var.github_token
+#  owner = "Karnov-Group-Norway"
+#}
 
 resource "github_repository" "microservice_repository" {
   count                       = var.provision_repository ? 1 : 0
@@ -146,8 +146,8 @@ resource "github_repository_file" "workflow_deploy" {
   branch     = "main"
   file       = ".github/workflows/deploy-${var.projs[count.index].service_name}.yml"
   content = templatefile("../../modules/az-func-microservice-v2/workflow_deploy.tftpl", {
-    service_name = var.projs[count.index].service_name,
-    func_path    = var.projs[count.index].proj_path
+    service_name   = var.projs[count.index].service_name,
+    func_path      = var.projs[count.index].proj_path
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"

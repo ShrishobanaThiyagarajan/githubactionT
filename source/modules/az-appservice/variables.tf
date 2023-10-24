@@ -40,9 +40,9 @@ variable "sln_path" {
 
 variable "apps" {
   type = list(object({
-    service_name = string
-    proj_path    = string
-    apptype      = optional(string, "appservice")
+    service_name   = string
+    proj_path      = string
+    apptype        = optional(string, "appservice")
   }))
   default = []
 }

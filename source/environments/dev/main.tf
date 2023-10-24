@@ -417,8 +417,8 @@ module "microservice_AppServicePlayground" {
   environment_name = var.environment_name
   apps = [
     {
-      service_name = "AppServicePlayground"
-      proj_path    = "./source/AppServicePlayground.Web/AppServicePlayground.Web.csproj"
+      service_name   = "AppServicePlayground"
+      proj_path      = "./source/AppServicePlayground.Web/AppServicePlayground.Web.csproj",
     }
   ]
   github_token                     = var.github_token

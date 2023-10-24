@@ -13,9 +13,9 @@ variable "provision_repository" {
 
 variable "projs" {
   type = list(object({
-    service_name = string
-    proj_path    = string
-    apptype      = string
+    service_name   = string
+    proj_path      = string
+    apptype        = string
   }))
   default = []
 }
