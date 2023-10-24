@@ -8,10 +8,10 @@ terraform {
 }
 
 # Configure the GitHub Provider
-#provider "github" {
-#  token = var.github_token
-#  owner = "Karnov-Group-Norway"
-#}
+provider "github" {
+  token = var.github_token
+  owner = "Karnov-Group-Norway"
+}
 
 resource "github_repository" "microservice_repository" {
   count                       = var.provision_repository ? 1 : 0
