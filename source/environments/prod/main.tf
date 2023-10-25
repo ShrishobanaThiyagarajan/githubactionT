@@ -304,3 +304,15 @@ module "microservice_KPortal" {
   ]
 }
 
+module "microservice_ContentReports" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "ContentReports"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "ContentReports",
+      proj_path    = "./source/KarnovN.ContentReportsProducer.Func/KarnovN.ContentReports.func.csproj"
+    }
+  ]
+}
