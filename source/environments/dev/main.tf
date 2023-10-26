@@ -485,7 +485,85 @@ module "microservice_ContentReports" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+data "azurerm_key_vault_secret" "invoicebasis_sonarcloud_token" {
+  name         = "InvoiceBasisSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_InvoiceBasis" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "InvoiceBasis"
+  funcs = [
+    {
+      service_name = "InvoiceBasis",
+      proj_path    = "./source/KarnovN.InvoiceBasis.Func/KarnovN.InvoiceBasis.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./InvoiceBasis.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.invoicebasis_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "khealth_sonarcloud_token" {
+  name         = "KHealthSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_KHealth" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "KHealth"
+  funcs = [
+    {
+      service_name = "KHealth",
+      proj_path    = "./source/KarnovN.KHealth.Func/KarnovN.KHealth.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./KHealth.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.khealth_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "legalfield_sonarcloud_token" {
+  name         = "LegalFieldSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_LegalField" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "LegalField"
+  funcs = [
+    {
+      service_name = "LegalField",
+      proj_path    = "./source/KarnovN.LegalField.Func/KarnovN.LegalField.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./LegalField.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.legalfield_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
-}
+} 
