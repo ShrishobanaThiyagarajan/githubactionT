@@ -316,3 +316,43 @@ module "microservice_ContentReports" {
     }
   ]
 }
+
+module "microservice_InvoiceBasis" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "InvoiceBasis"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "InvoiceBasis",
+      proj_path    = "./source/KarnovN.InvoiceBasis.Func/KarnovN.InvoiceBasis.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_KHealth" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "KHealth"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "KHealth",
+      proj_path    = "./source/KarnovN.KHealth.Func/KarnovN.KHealth.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_LegalField" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "LegalField"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "LegalField",
+      proj_path    = "./source/KarnovN.LegalField.Func/KarnovN.LegalField.Func.csproj"
+    }
+  ]
+}
+
