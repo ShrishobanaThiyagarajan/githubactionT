@@ -356,3 +356,63 @@ module "microservice_LegalField" {
   ]
 }
 
+module "microservice_LovdataPublisher" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "LovdataPublisher"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "LovdataPublisher",
+      proj_path    = "./source/KarnovN.LovdataPublisher.Func/KarnovN.LovdataPublisher.Func.csproj"
+    },
+    {
+      service_name = "LovdataPublisherSync",
+      proj_path    = "./source/KarnovN.LovdataPublisherSync.Func/KarnovN.LovdataPublisherSync.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_MasterDocument" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "MasterDocument"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "MasterDocument",
+      proj_path    = "./source/KarnovN.MasterDocument.Func/KarnovN.MasterDocument.Func.csproj"
+    },
+    {
+      service_name = "MasterDocumentInfo",
+      proj_path    = "./source/KarnovN.MasterDocumentInfo.Func/KarnovN.MasterDocumentInfo.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_Metadata" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Metadata"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "Metadata",
+      proj_path    = "./source/KarnovN.Metadata.Func/KarnovN.Metadata.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_MetadataSync" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "MetadataSync"
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  funcs = [
+    {
+      service_name = "MetadataSync",
+      proj_path    = "./source/KarnovN.MetadataSync.Func/KarnovN.MetadataSync.Func.csproj"
+    }
+  ]
+}
+
