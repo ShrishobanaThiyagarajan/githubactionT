@@ -676,6 +676,92 @@ module "microservice_MetadataSync" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+data "azurerm_key_vault_secret" "workitem_sonarcloud_token" {
+  name         = "WorkItemSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_WorkItem" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "WorkItem"
+  funcs = [
+    {
+      service_name = "WorkItem",
+      proj_path    = "./source/KarnovN.WorkItem.Func/KarnovN.WorkItem.Func.csproj"
+    },
+    {
+      service_name = "WorkItemPublish",
+      proj_path    = "./source/KarnovN.WorkItemPublish.Func/KarnovN.WorkItemPublish.Func.csproj"
+    },
+    {
+      service_name = "WorkItemTools",
+      proj_path    = "./source/KarnovN.WorkItemTools.Func/KarnovN.WorkItemTools.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./WorkItem.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.workitem_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "workitemnotification_sonarcloud_token" {
+  name         = "WorkItemNotificationSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_WorkItemNotification" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "WorkItemNotification"
+  funcs = [
+    {
+      service_name = "WorkItemNotification",
+      proj_path    = "./source/KarnovN.WorkItemNotification.Func/KarnovN.WorkItemNotification.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./WorkItemNotification.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.workitemnotification_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "workitemsharing_sonarcloud_token" {
+  name         = "WorkItemSharingSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_WorkItemSharing" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "WorkItemSharing"
+  funcs = [
+    {
+      service_name = "WorkItemSharing",
+      proj_path    = "./source/KarnovN.WorkItemSharing.Func/KarnovN.WorkItemSharing.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./WorkItemSharing.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.workitemsharing_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
