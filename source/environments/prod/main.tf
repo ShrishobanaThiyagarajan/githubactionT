@@ -257,10 +257,10 @@ module "microservice_User" {
 }
 
 module "microservice_Statistics" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "Statistics"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Statistics"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "Statistics",
@@ -278,10 +278,10 @@ module "microservice_Statistics" {
 }
 
 module "microservice_LovdataImport" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "LovdataImport"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "LovdataImport"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "LovdataImport",
@@ -295,20 +295,20 @@ module "microservice_KPortal" {
   service_name                   = "KPortal"
   appservice_resource_group_name = "functions-${lower(var.environment_name)}-k"
   service_plan_sku               = "P1v2"
-  environment_name = var.environment_name
+  environment_name               = var.environment_name
   apps = [
     {
-      service_name   = "KPortal"
-      proj_path      = "./source/KPortal.Web/KPortal.Web.csproj",
+      service_name = "KPortal"
+      proj_path    = "./source/KPortal.Web/KPortal.Web.csproj",
     }
   ]
 }
 
 module "microservice_ContentReports" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "ContentReports"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "ContentReports"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "ContentReports",
@@ -318,10 +318,10 @@ module "microservice_ContentReports" {
 }
 
 module "microservice_InvoiceBasis" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "InvoiceBasis"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "InvoiceBasis"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "InvoiceBasis",
@@ -331,10 +331,10 @@ module "microservice_InvoiceBasis" {
 }
 
 module "microservice_KHealth" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "KHealth"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "KHealth"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "KHealth",
@@ -344,10 +344,10 @@ module "microservice_KHealth" {
 }
 
 module "microservice_LegalField" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "LegalField"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "LegalField"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "LegalField",
@@ -357,10 +357,10 @@ module "microservice_LegalField" {
 }
 
 module "microservice_LovdataPublisher" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "LovdataPublisher"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "LovdataPublisher"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "LovdataPublisher",
@@ -374,10 +374,10 @@ module "microservice_LovdataPublisher" {
 }
 
 module "microservice_MasterDocument" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "MasterDocument"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "MasterDocument"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "MasterDocument",
@@ -391,10 +391,10 @@ module "microservice_MasterDocument" {
 }
 
 module "microservice_Metadata" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "Metadata"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Metadata"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "Metadata",
@@ -404,10 +404,10 @@ module "microservice_Metadata" {
 }
 
 module "microservice_MetadataSync" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "MetadataSync"
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "MetadataSync"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
   funcs = [
     {
       service_name = "MetadataSync",
@@ -415,4 +415,52 @@ module "microservice_MetadataSync" {
     }
   ]
 }
+
+module "microservice_WorkItem" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "WorkItem"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "WorkItem",
+      proj_path    = "./source/KarnovN.WorkItem.Func/KarnovN.WorkItem.Func.csproj"
+    },
+    {
+      service_name = "WorkItemPublish",
+      proj_path    = "./source/KarnovN.WorkItemPublish.Func/KarnovN.WorkItemPublish.Func.csproj"
+    },
+    {
+      service_name = "WorkItemTools",
+      proj_path    = "./source/KarnovN.WorkItemTools.Func/KarnovN.WorkItemTools.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_WorkItemNotification" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "WorkItemNotification"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "WorkItemNotification",
+      proj_path    = "./source/KarnovN.WorkItemNotification.Func/KarnovN.WorkItemNotification.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_WorkItemSharing" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "WorkItemSharing"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "WorkItemSharing",
+      proj_path    = "./source/KarnovN.WorkItemSharing.Func/KarnovN.WorkItemSharing.Func.csproj"
+    }
+  ]
+}
+
 
