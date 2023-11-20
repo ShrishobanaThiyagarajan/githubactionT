@@ -767,7 +767,7 @@ module "package_CloudBerry" {
   service_name                     = "CloudBerry"
   github_token                     = var.github_token
   provision_repository             = true
-  sln_path                         = "./CloudBerryDocumentModel.sln"
+  sln_path                         = "./CloudBerry.sln"
   sonarcloud_token                 = data.azurerm_key_vault_secret.workitemsharing_sonarcloud_token.value
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
