@@ -134,6 +134,7 @@ resource "github_repository_file" "workflow_release" {
     # Use first service name as the convention for the project name.
     # Assuming it represents the whole repository.
     sonarcloud_project = "Karnov-Group-Norway_${var.projs[0].service_name}"
+    apptype            = var.projs[count.index].apptype
   })
   commit_message      = "Managed by kPlatform"
   commit_author       = "kPlatform"
