@@ -417,8 +417,8 @@ module "microservice_AppServicePlayground" {
   environment_name = var.environment_name
   apps = [
     {
-      service_name   = "AppServicePlayground"
-      proj_path      = "./source/AppServicePlayground.Web/AppServicePlayground.Web.csproj",
+      service_name = "AppServicePlayground"
+      proj_path    = "./source/AppServicePlayground.Web/AppServicePlayground.Web.csproj",
     }
   ]
   github_token                     = var.github_token
@@ -445,8 +445,8 @@ module "microservice_KPortal" {
   environment_name = var.environment_name
   apps = [
     {
-      service_name   = "KPortal"
-      proj_path      = "./source/KPortal.Web/KPortal.Web.csproj",
+      service_name = "KPortal"
+      proj_path    = "./source/KPortal.Web/KPortal.Web.csproj",
     }
   ]
   github_token                     = var.github_token
@@ -762,7 +762,29 @@ module "microservice_WorkItemSharing" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+module "package_CloudBerry" {
+  source                           = "../../modules/nuget-package"
+  service_name                     = "CloudBerry"
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./CloudBerryDocumentModel.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.workitemsharing_sonarcloud_token.value
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+module "package_DocumentModel" {
+  source                           = "../../modules/nuget-package"
+  service_name                     = "DocumentModel"
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./DocumentModel.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.workitemsharing_sonarcloud_token.value
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
-} 
+}
