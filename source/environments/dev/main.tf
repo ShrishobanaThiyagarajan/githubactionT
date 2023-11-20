@@ -762,15 +762,25 @@ module "microservice_WorkItemSharing" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+data "azurerm_key_vault_secret" "cloudberry_sonarcloud_token" {
+  name         = "CloudBerrySonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
 module "package_CloudBerry" {
   source                           = "../../modules/nuget-package"
   service_name                     = "CloudBerry"
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./CloudBerry.sln"
-  sonarcloud_token                 = data.azurerm_key_vault_secret.workitemsharing_sonarcloud_token.value
+  sonarcloud_token                 = data.azurerm_key_vault_secret.cloudberry_sonarcloud_token.value
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "documentmodel_sonarcloud_token" {
+  name         = "DocumentModelSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
 }
 
 module "package_DocumentModel" {
@@ -779,7 +789,7 @@ module "package_DocumentModel" {
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./DocumentModel.sln"
-  sonarcloud_token                 = data.azurerm_key_vault_secret.workitemsharing_sonarcloud_token.value
+  sonarcloud_token                 = data.azurerm_key_vault_secret.documentmodel_sonarcloud_token.value
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
