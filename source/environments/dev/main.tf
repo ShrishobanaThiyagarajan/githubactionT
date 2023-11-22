@@ -794,6 +794,114 @@ module "package_DocumentModel" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+data "azurerm_key_vault_secret" "kwordbff_sonarcloud_token" {
+  name         = "KWordBffSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_KWordBff" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "KWordBff"
+  funcs = [
+    {
+      service_name = "KWordBff",
+      proj_path    = "./source/KarnovN.KWordBff.Func/KarnovN.KWordBff.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./KWordBff.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.kwordbff_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "linker_sonarcloud_token" {
+  name         = "LinkerSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_Linker" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Linker"
+  funcs = [
+    {
+      service_name = "Linker",
+      proj_path    = "./source/KarnovN.Linker.Func/KarnovN.Linker.Func.csproj"
+    },
+    {
+      service_name = "LinkerFeed",
+      proj_path    = "./source/KarnovN.Linker.Feed.Func/KarnovN.Linker.Feed.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./Linker.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.linker_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "notification_sonarcloud_token" {
+  name         = "NotificationSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_Notification" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Notification"
+  funcs = [
+    {
+      service_name = "Notification",
+      proj_path    = "./source/KarnovN.Notification.Func/KarnovN.Notification.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./Notification.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.notification_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "templates_sonarcloud_token" {
+  name         = "TemplatesSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_Templates" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Templates"
+  funcs = [
+    {
+      service_name = "Templates",
+      proj_path    = "./source/KarnovN.Templates.Func/KarnovN.Templates.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./Templates.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.templates_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
