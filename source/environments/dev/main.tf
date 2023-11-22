@@ -818,6 +818,7 @@ module "microservice_KWordBff" {
   azure_credentials_prod           = var.azure_credentials_prod
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+  build_and_release_nuget          = false
 }
 
 data "azurerm_key_vault_secret" "linker_sonarcloud_token" {
