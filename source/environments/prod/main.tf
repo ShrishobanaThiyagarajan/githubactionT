@@ -463,4 +463,45 @@ module "microservice_WorkItemSharing" {
   ]
 }
 
+module "microservice_Linker" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Linker"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "Linker",
+      proj_path    = "./source/KarnovN.Linker.Func/KarnovN.Linker.Func.csproj"
+    },
+    {
+      service_name = "LinkerFeed",
+      proj_path    = "./source/KarnovN.Linker.Feed.Func/KarnovN.Linker.Feed.Func.csproj"
+    }
+  ]
+}
 
+module "microservice_Notification" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Notification"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "Notification",
+      proj_path    = "./source/KarnovN.Notification.Func/KarnovN.Notification.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_Templates" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Templates"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "Templates",
+      proj_path    = "./source/KarnovN.Templates.Func/KarnovN.Templates.Func.csproj"
+    }
+  ]
+}
