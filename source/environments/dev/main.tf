@@ -945,6 +945,84 @@ module "microservice_NtsHelloWorld" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+data "azurerm_key_vault_secret" "noteid_sonarcloud_token" {
+  name         = "NoteIdSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_NoteId" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "NoteId"
+  funcs = [
+    {
+      service_name = "NoteId",
+      proj_path    = "./source/KarnovN.NoteId.Func/KarnovN.NoteId.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./NoteId.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.noteid_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "publisher_sonarcloud_token" {
+  name         = "PublisherSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_Publisher" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "Publisher"
+  funcs = [
+    {
+      service_name = "Publisher",
+      proj_path    = "./source/KarnovN.Publisher.Func/KarnovN.Publisher.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./Publisher.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.publisher_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
+data "azurerm_key_vault_secret" "publishinginfo_sonarcloud_token" {
+  name         = "PublishingInfoSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_PublishingInfo" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "PublishingInfo"
+  funcs = [
+    {
+      service_name = "PublishingInfo",
+      proj_path    = "./source/KarnovN.PublishingInfo.Func/KarnovN.PublishingInfo.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./PublishingInfo.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.publishinginfo_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 output "lovdata_statistics_sftp" {
   sensitive = true
   value     = module.lovdata-statistics-sftp-ingest
