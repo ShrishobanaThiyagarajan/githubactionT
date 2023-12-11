@@ -11,27 +11,27 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_storage_account" "sftpstorage" {
-  resource_group_name              = var.resource_group_name
-  account_tier                     = "Standard"
-  name                             = "storagesftp${lower(var.environment_name)}k"
-  location                         = "West Europe"
-  account_kind                     = "StorageV2"
-  account_replication_type         = "RAGRS"
-  cross_tenant_replication_enabled = false
-  is_hns_enabled                   = true
-  allow_nested_items_to_be_public  = false
-  sftp_enabled                     = true
-  tags = {
-    Environment = var.environment_name
-  }
-}
+# resource "azurerm_storage_account" "sftpstorage" {
+#   resource_group_name              = var.resource_group_name
+#   account_tier                     = "Standard"
+#   name                             = "storagesftp${lower(var.environment_name)}k"
+#   location                         = "West Europe"
+#   account_kind                     = "StorageV2"
+#   account_replication_type         = "RAGRS"
+#   cross_tenant_replication_enabled = false
+#   is_hns_enabled                   = true
+#   allow_nested_items_to_be_public  = false
+#   sftp_enabled                     = true
+#   tags = {
+#     Environment = var.environment_name
+#   }
+# }
 
-resource "azurerm_storage_container" "lovdatastats" {
-  name                  = "lovdatastats"
-  storage_account_name  = azurerm_storage_account.sftpstorage.name
-  container_access_type = "private"
-}
+# resource "azurerm_storage_container" "lovdatastats" {
+#   name                  = "lovdatastats"
+#   storage_account_name  = azurerm_storage_account.sftpstorage.name
+#   container_access_type = "private"
+# }
 
 # resource "azurerm_storage_account_local_user" "lovdata" {
 #   name                 = "lovdata"
