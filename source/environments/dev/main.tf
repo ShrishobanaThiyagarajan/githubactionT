@@ -44,24 +44,6 @@ module "lovdata-statistics-sftp-ingest" {
   environment_name    = var.environment_name
 }
 
-# resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsHostname_secret" {
-#   key_vault_id = azurerm_key_vault.keyvault.id
-#   name         = "SftpLovdataStatsHostname"
-#   value        = module.lovdata-statistics-sftp-ingest.primary_blob_host
-# }
-
-# resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsUsername_secret" {
-#   key_vault_id = azurerm_key_vault.keyvault.id
-#   name         = "SftpLovdataStatsUsername"
-#   value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_name
-# }
-
-# resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsPassword_secret" {
-#   key_vault_id = azurerm_key_vault.keyvault.id
-#   name         = "SftpLovdataStatsPassword"
-#   value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
-# }
-
 resource "azurerm_key_vault_secret" "keyvault_BackofficeEndpoint" {
   key_vault_id = azurerm_key_vault.keyvault.id
   name         = "BackofficeEndpoint"
@@ -1021,9 +1003,4 @@ module "microservice_PublishingInfo" {
   azure_credentials_prod           = var.azure_credentials_prod
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
-}
-
-output "lovdata_statistics_sftp" {
-  sensitive = true
-  value     = module.lovdata-statistics-sftp-ingest
 }
