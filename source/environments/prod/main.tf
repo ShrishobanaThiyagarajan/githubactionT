@@ -39,11 +39,7 @@ resource "azurerm_key_vault" "keyvault" {
   sku_name = "standard"
 }
 
-module "lovdata-statistics-sftp-ingest" {
-  source              = "../../modules/lovdata-statistics-sftp-ingest"
-   resource_group_name = azurerm_resource_group.resourcegroup.name
-   environment_name    = var.environment_name
- }
+
 
 
 resource "azurerm_key_vault_secret" "keyvault_BackofficeEndpoint" {
