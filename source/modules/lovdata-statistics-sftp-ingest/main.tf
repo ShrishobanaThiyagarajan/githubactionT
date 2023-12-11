@@ -33,79 +33,79 @@ resource "azurerm_storage_container" "lovdatastats" {
   container_access_type = "private"
 }
 
-resource "azurerm_storage_account_local_user" "lovdata" {
-  name                 = "lovdata"
-  storage_account_id   = azurerm_storage_account.sftpstorage.id
-  ssh_key_enabled      = false
-  ssh_password_enabled = true
-  home_directory       = "lovdatastats"
+# resource "azurerm_storage_account_local_user" "lovdata" {
+#   name                 = "lovdata"
+#   storage_account_id   = azurerm_storage_account.sftpstorage.id
+#   ssh_key_enabled      = false
+#   ssh_password_enabled = true
+#   home_directory       = "lovdatastats"
 
-  permission_scope {
-    permissions {
-      create = true
-      write  = true
-      list   = true
-    }
-    service       = "blob"
-    resource_name = azurerm_storage_container.lovdatastats.name
-  }
-}
+#   permission_scope {
+#     permissions {
+#       create = true
+#       write  = true
+#       list   = true
+#     }
+#     service       = "blob"
+#     resource_name = azurerm_storage_container.lovdatastats.name
+#   }
+# }
 
-# This is Karnov's account. Used to ingest data form lovdata
-# and product pubsub messages.
-resource "azurerm_storage_account_local_user" "lovdataproducer" {
-  name                 = "lovdataproducer"
-  storage_account_id   = azurerm_storage_account.sftpstorage.id
-  ssh_key_enabled      = false
-  ssh_password_enabled = true
-  home_directory       = "lovdatastats"
+# # This is Karnov's account. Used to ingest data form lovdata
+# # and product pubsub messages.
+# resource "azurerm_storage_account_local_user" "lovdataproducer" {
+#   name                 = "lovdataproducer"
+#   storage_account_id   = azurerm_storage_account.sftpstorage.id
+#   ssh_key_enabled      = false
+#   ssh_password_enabled = true
+#   home_directory       = "lovdatastats"
 
-  permission_scope {
-    permissions {
-      delete = true
-      read   = true
-      create = true
-      list   = true
-      write  = true
-    }
-    service       = "blob"
-    resource_name = azurerm_storage_container.lovdatastats.name
-  }
-}
+#   permission_scope {
+#     permissions {
+#       delete = true
+#       read   = true
+#       create = true
+#       list   = true
+#       write  = true
+#     }
+#     service       = "blob"
+#     resource_name = azurerm_storage_container.lovdatastats.name
+#   }
+# }
 
-output "local_user_lovdata_name" {
-  description = "Username for `localUser/lovdata`"
-  value       = azurerm_storage_account_local_user.lovdata.name
-}
+# output "local_user_lovdata_name" {
+#   description = "Username for `localUser/lovdata`"
+#   value       = azurerm_storage_account_local_user.lovdata.name
+# }
 
-output "local_user_lovdata_password" {
-  sensitive   = true
-  description = "The generated password for `localUser/lovdata`"
-  value       = azurerm_storage_account_local_user.lovdata.password
-}
+# output "local_user_lovdata_password" {
+#   sensitive   = true
+#   description = "The generated password for `localUser/lovdata`"
+#   value       = azurerm_storage_account_local_user.lovdata.password
+# }
 
-output "local_user_lovdataproducer_name" {
-  description = "Username for `localUser/lovdataproducer`"
-  value       = azurerm_storage_account_local_user.lovdataproducer.name
-}
+# output "local_user_lovdataproducer_name" {
+#   description = "Username for `localUser/lovdataproducer`"
+#   value       = azurerm_storage_account_local_user.lovdataproducer.name
+# }
 
-output "local_user_lovdataproducer_password" {
-  sensitive   = true
-  description = "The generated password for `localUser/lovdataproducer`"
-  value       = azurerm_storage_account_local_user.lovdataproducer.password
-}
+# output "local_user_lovdataproducer_password" {
+#   sensitive   = true
+#   description = "The generated password for `localUser/lovdataproducer`"
+#   value       = azurerm_storage_account_local_user.lovdataproducer.password
+# }
 
-output "primary_blob_host" {
-  sensitive = false
-  value = azurerm_storage_account.sftpstorage.primary_blob_host
-}
+# output "primary_blob_host" {
+#   sensitive = false
+#   value = azurerm_storage_account.sftpstorage.primary_blob_host
+# }
 
-output "connection_string_lovdata" {
-  sensitive = false
-  value = "${azurerm_storage_account.sftpstorage.name}.${azurerm_storage_account_local_user.lovdata.name}@${azurerm_storage_account.sftpstorage.primary_blob_host}"
-}
+# output "connection_string_lovdata" {
+#   sensitive = false
+#   value = "${azurerm_storage_account.sftpstorage.name}.${azurerm_storage_account_local_user.lovdata.name}@${azurerm_storage_account.sftpstorage.primary_blob_host}"
+# }
 
-output "connection_string_lovdataproducer" {
-  sensitive = false
-  value = "${azurerm_storage_account.sftpstorage.name}.${azurerm_storage_account_local_user.lovdataproducer.name}@${azurerm_storage_account.sftpstorage.primary_blob_host}"
-}
+# output "connection_string_lovdataproducer" {
+#   sensitive = false
+#   value = "${azurerm_storage_account.sftpstorage.name}.${azurerm_storage_account_local_user.lovdataproducer.name}@${azurerm_storage_account.sftpstorage.primary_blob_host}"
+# }

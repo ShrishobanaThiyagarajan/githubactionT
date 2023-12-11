@@ -41,27 +41,27 @@ resource "azurerm_key_vault" "keyvault" {
 
 module "lovdata-statistics-sftp-ingest" {
   source              = "../../modules/lovdata-statistics-sftp-ingest"
-  resource_group_name = azurerm_resource_group.resourcegroup.name
-  environment_name    = var.environment_name
-}
+   resource_group_name = azurerm_resource_group.resourcegroup.name
+   environment_name    = var.environment_name
+ }
 
-resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsHostname_secret" {
-  key_vault_id = azurerm_key_vault.keyvault.id
-  name         = "SftpLovdataStatsHostname"
-  value        = module.lovdata-statistics-sftp-ingest.primary_blob_host
-}
+# resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsHostname_secret" {
+#   key_vault_id = azurerm_key_vault.keyvault.id
+#   name         = "SftpLovdataStatsHostname"
+#   value        = module.lovdata-statistics-sftp-ingest.primary_blob_host
+# }
 
-resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsUsername_secret" {
-  key_vault_id = azurerm_key_vault.keyvault.id
-  name         = "SftpLovdataStatsUsername"
-  value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_name
-}
+# resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsUsername_secret" {
+#   key_vault_id = azurerm_key_vault.keyvault.id
+#   name         = "SftpLovdataStatsUsername"
+#   value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_name
+# }
 
-resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsPassword_secret" {
-  key_vault_id = azurerm_key_vault.keyvault.id
-  name         = "SftpLovdataStatsPassword"
-  value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
-}
+# resource "azurerm_key_vault_secret" "keyvault_SftpLovdataStatsPassword_secret" {
+#   key_vault_id = azurerm_key_vault.keyvault.id
+#   name         = "SftpLovdataStatsPassword"
+#   value        = module.lovdata-statistics-sftp-ingest.local_user_lovdataproducer_password
+# }
 
 resource "azurerm_key_vault_secret" "keyvault_BackofficeEndpoint" {
   key_vault_id = azurerm_key_vault.keyvault.id
