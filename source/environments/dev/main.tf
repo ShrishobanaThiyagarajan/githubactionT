@@ -1010,14 +1010,14 @@ module "microservice_LLMIntegration" {
   funcs = [
     {
       service_name = "LLMIntegration",
-      proj_path    = "./source/KarnovN.LLMIntegration.Func/KarnovN.LLMIntegration.Func.csproj"
+      proj_path    = "./source/LLMIntegration.Func/LLMIntegration.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
   github_token                     = var.github_token
   provision_repository             = true
-  sln_path                         = "./source/LLMIntegration.sln"
+  sln_path                         = "./LLMIntegration.sln"
   sonarcloud_token                 = data.azurerm_key_vault_secret.publishinginfo_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
   azure_credentials_prod           = var.azure_credentials_prod
