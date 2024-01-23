@@ -11,6 +11,8 @@ terraform {
 provider "github" {
   token = var.github_token
   owner = "Karnov-Group-Norway"
+  write_delay_ms = 5000
+  read_delay_ms = 5000
 }
 
 resource "github_repository" "microservice_repository" {
