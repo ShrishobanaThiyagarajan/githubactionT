@@ -612,6 +612,10 @@ module "microservice_Metadata" {
     {
       service_name = "Metadata",
       proj_path    = "./source/KarnovN.Metadata.Func/KarnovN.Metadata.Func.csproj"
+    },
+    {
+      service_name = "MetadataWriter",
+      proj_path    = "./source/KarnovN.MetadataWriter.Func/KarnovN.MetadataWriter.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
