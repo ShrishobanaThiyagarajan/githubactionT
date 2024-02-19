@@ -598,6 +598,7 @@ module "microservice_MasterDocument" {
   azure_credentials_prod           = var.azure_credentials_prod
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+  service_plan_sku                 = "EP1"
 }
 
 data "azurerm_key_vault_secret" "metadata_sonarcloud_token" {
@@ -902,7 +903,6 @@ module "microservice_OsaHelloWorld" {
   azure_credentials_prod           = var.azure_credentials_prod
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
-  service_plan_sku                 = "EP1"
 }
 
 module "microservice_NtsHelloWorld" {
