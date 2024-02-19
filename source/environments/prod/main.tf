@@ -352,6 +352,7 @@ module "microservice_MasterDocument" {
   service_name             = "MasterDocument"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  service_plan_sku                 = "EP1"
   funcs = [
     {
       service_name = "MasterDocument",
