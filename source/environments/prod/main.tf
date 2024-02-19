@@ -483,3 +483,42 @@ module "microservice_Templates" {
     }
   ]
 }
+
+module "microservice_Publisher" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "Publisher"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "Publisher",
+      proj_path    = "./source/KarnovN.Publisher.Func/KarnovN.Publisher.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_PublishingInfo" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "PublishingInfo"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "PublishingInfo",
+      proj_path    = "./source/KarnovN.PublishingInfo.Func/KarnovN.PublishingInfo.Func.csproj"
+    }
+  ]
+}
+
+module "microservice_NoteId" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "NoteId"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  funcs = [
+    {
+      service_name = "NoteId",
+      proj_path    = "./source/KarnovN.NoteId.Func/KarnovN.NoteId.Func.csproj"
+    }
+  ]
+}
