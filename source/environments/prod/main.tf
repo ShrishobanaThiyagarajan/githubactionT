@@ -523,3 +523,16 @@ module "microservice_NoteId" {
     }
   ]
 }
+module "microservice_LLMIntegration" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "LLMIntegration"
+  funcs = [
+    {
+      service_name = "LLMIntegration",
+      proj_path    = "./source/LLMIntegration.Func/LLMIntegration.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+
+}
