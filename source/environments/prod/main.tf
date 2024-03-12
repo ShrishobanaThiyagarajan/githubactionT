@@ -536,3 +536,15 @@ module "microservice_LLMIntegration" {
   environment_name                 = var.environment_name
 
 }
+module "microservice_WorkItemContentTools" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "WorkItemContentTools"
+  funcs = [
+    {
+      service_name = "WorkItemContentTools",
+      proj_path    = "./source/WorkItemContentTools.Func/WorkItemContentTools.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+}
