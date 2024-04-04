@@ -283,6 +283,7 @@ module "microservice_ContentReports" {
   service_name             = "ContentReports"
   func_resource_group_name = "functions-${lower(var.environment_name)}-k"
   environment_name         = var.environment_name
+  service_plan_sku                 = "EP1"
   funcs = [
     {
       service_name = "ContentReports",
