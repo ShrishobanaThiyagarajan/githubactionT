@@ -52,7 +52,7 @@ resource "azurerm_service_plan" "service_plan" {
   resource_group_name = "functions-${var.environment_name}-k"
   location            = "West Europe"
   os_type             = "Windows"
-  sku_name            = "Y1"
+  sku_name            = "EP1"
   tags = {
     environment = var.environment_name
   }

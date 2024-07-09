@@ -462,6 +462,33 @@ module "microservice_ContentReports" {
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
 
+//data "azurerm_key_vault_secret" "authorcontract_sonarcloud_token" {
+//  name         = "AuthorContractSonarcloudToken"
+//  key_vault_id = azurerm_key_vault.keyvault.id
+//}
+
+module "microservice_AuthorContract" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "AuthorContract"
+  funcs = [
+    {
+      service_name = "AuthorContract",
+      proj_path    = "./source/KarnovN.AuthorContract.Func/KarnovN.AuthorContract.func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  service_plan_sku                 = "Y1"
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./AuthorContract.sln"
+  //sonarcloud_token                 = data.azurerm_key_vault_secret.authorcontract_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
+
 data "azurerm_key_vault_secret" "invoicebasis_sonarcloud_token" {
   name         = "InvoiceBasisSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
@@ -591,6 +618,7 @@ module "microservice_MasterDocument" {
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
   environment_name                 = var.environment_name
+  service_plan_sku                 = "EP1"
   github_token                     = var.github_token
   provision_repository             = true
   sln_path                         = "./MasterDocument.sln"

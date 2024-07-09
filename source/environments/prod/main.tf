@@ -54,14 +54,6 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
   value        = "4080674685"
 }
 
-module "az_func_microservice_ContentReports" {
-  source              = "../../modules/az-func-microservice"
-  service_name        = "ContentReports"
-  github_token        = var.github_token
-  environment_name    = var.environment_name
-  resource_group_name = azurerm_resource_group.resourcegroup.name
-}
-
 resource "azurerm_dashboard_grafana" "grafana" {
   name                              = "grafana-prod-k"
   resource_group_name               = azurerm_resource_group.resourcegroup.name
@@ -290,6 +282,13 @@ module "microservice_ContentReports" {
       proj_path    = "./source/KarnovN.ContentReportsProducer.Func/KarnovN.ContentReports.func.csproj"
     }
   ]
+}
+module "az_func_microservice_ContentReports" {
+  source              = "../../modules/az-func-microservice"
+  service_name        = "ContentReports"
+  github_token        = var.github_token
+  environment_name    = var.environment_name
+  resource_group_name = azurerm_resource_group.resourcegroup.name
 }
 
 module "microservice_InvoiceBasis" {
