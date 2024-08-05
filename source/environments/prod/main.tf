@@ -291,6 +291,27 @@ module "az_func_microservice_ContentReports" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
 }
 
+module "microservice_AuthorContract" {
+  source                   = "../../modules/az-func-microservice-v2"
+  service_name             = "AuthorContract"
+  func_resource_group_name = "functions-${lower(var.environment_name)}-k"
+  environment_name         = var.environment_name
+  service_plan_sku                 = "EP1"
+  funcs = [
+    {
+      service_name = "AuthorContract",
+      proj_path    = "./source/KarnovN.AuthorContract.Func/KarnovN.AuthorContract.func.csproj"
+    }
+  ]
+}
+module "az_func_microservice_AuthorContract" {
+  source              = "../../modules/az-func-microservice"
+  service_name        = "AuthorContract"
+  github_token        = var.github_token
+  environment_name    = var.environment_name
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+}
+
 module "microservice_InvoiceBasis" {
   source                   = "../../modules/az-func-microservice-v2"
   service_name             = "InvoiceBasis"
