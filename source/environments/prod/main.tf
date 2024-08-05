@@ -303,13 +303,6 @@ module "microservice_AuthorContract" {
     }
   ]
 }
-module "az_func_microservice_AuthorContract" {
-  source              = "../../modules/az-func-microservice"
-  service_name        = "AuthorContract"
-  github_token        = var.github_token
-  environment_name    = var.environment_name
-  resource_group_name = azurerm_resource_group.resourcegroup.name
-}
 
 module "microservice_InvoiceBasis" {
   source                   = "../../modules/az-func-microservice-v2"
