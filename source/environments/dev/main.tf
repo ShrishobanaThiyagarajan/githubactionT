@@ -1079,6 +1079,31 @@ module "microservice_WorkItemContentTools" {
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
+data "azurerm_key_vault_secret" "taskprioritizer_sonarcloud_token" {
+  name         = "TaskPrioritizerSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+module "microservice_TaskPrioritizer" {
+  source       = "../../modules/az-func-microservice-v2"
+  service_name = "TaskPrioritizer"
+  funcs = [
+    {
+      service_name = "TaskPrioritizer",
+      proj_path    = "./source/KarnovN.TaskPrioritizer.Func/KarnovN.TaskPrioritizer.Func.csproj"
+    }
+  ]
+  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
+  environment_name                 = var.environment_name
+  github_token                     = var.github_token
+  provision_repository             = true
+  sln_path                         = "./TaskPrioritizer.sln"
+  sonarcloud_token                 = data.azurerm_key_vault_secret.publishinginfo_sonarcloud_token.value
+  azure_credentials_test           = var.azure_credentials_test
+  azure_credentials_prod           = var.azure_credentials_prod
+  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
+  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
+}
 
 module "microservice_GoeranDemo" {
   source       = "../../modules/az-func-microservice-v2"
