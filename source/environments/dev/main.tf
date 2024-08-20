@@ -1079,10 +1079,10 @@ module "microservice_WorkItemContentTools" {
   teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
   teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
 }
-# data "azurerm_key_vault_secret" "taskprioritizer_sonarcloud_token" {
-#   name         = "TaskPrioritizerSonarcloudToken"
-#   key_vault_id = azurerm_key_vault.keyvault.id
-# }
+data "azurerm_key_vault_secret" "taskprioritizer_sonarcloud_token" {
+  name         = "TaskPrioritizerSonarcloudToken"
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
 
 module "microservice_TaskPrioritizer" {
   source       = "../../modules/az-func-microservice-v2"
