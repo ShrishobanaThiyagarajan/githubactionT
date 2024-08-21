@@ -1090,7 +1090,7 @@ module "microservice_TaskPrioritizer" {
   funcs = [
     {
       service_name = "TaskPrioritizer",
-      proj_path    = "./source/KarnovN.TaskPrioritizer.Func/KarnovN.TaskPrioritizer.Func.csproj"
+      proj_path    = "./source/TaskPrioritizer.Func/TaskPrioritizer.Func.csproj"
     }
   ]
   func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
