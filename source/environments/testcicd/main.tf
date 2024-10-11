@@ -50,34 +50,8 @@ resource "azurerm_key_vault_secret" "keyvault_MondayOutdatedNotesBoardId" {
   value        = "3875956428"
 }
 
-data "azurerm_key_vault_secret" "kdashboardbff_sonarcloud_token" {
-  name         = "kDashboardBffSonarcloudToken"
-  key_vault_id = azurerm_key_vault.keyvault.id
-}
-
-module "microservice_kDashboardBff" {
-  source       = "../../modules/az-func-microservice-v2"
-  service_name = "kDashboardBff"
-  funcs = [
-    {
-      service_name = "kDashboardBff",
-      proj_path    = "./source/KarnovN.kDashboardBff.Func/KarnovN.kDashboardBff.Func.csproj",
-    }
-  ]
-  func_resource_group_name         = "functions-${lower(var.environment_name)}-k"
-  environment_name                 = var.environment_name
-  github_token                     = var.github_token
-  provision_repository             = true
-  sln_path                         = "./kDashboard.sln"
-  sonarcloud_token                 = data.azurerm_key_vault_secret.kdashboardbff_sonarcloud_token.value
-  azure_credentials_test           = var.azure_credentials_test
-  azure_credentials_prod           = var.azure_credentials_prod
-  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
-  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
-  build_and_release_nuget          = false
-}
 data "azurerm_key_vault_secret" "kportalapp_sonarcloud_token" {
-  name         = "KPortalappSonarcloudToken"
+  name         = "KPortalSonarcloudToken"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
@@ -99,12 +73,5 @@ module "microservice_KPortalapp" {
   sln_path                         = "./KPortalapp.sln"
   sonarcloud_token                 = data.azurerm_key_vault_secret.kportalapp_sonarcloud_token.value
   azure_credentials_test           = var.azure_credentials_test
-  azure_credentials_prod           = var.azure_credentials_prod
-  teams_incoming_webhooks_url_test = var.teams_incoming_webhooks_url_test
-  teams_incoming_webhooks_url_prod = var.teams_incoming_webhooks_url_prod
-}
-
-data "azurerm_key_vault_secret" "contentreports_sonarcloud_token" {
-  name         = "ContentReportsSonarcloudToken"
-  key_vault_id = azurerm_key_vault.keyvault.id
+  
 }
