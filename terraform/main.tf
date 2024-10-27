@@ -17,7 +17,6 @@ resource "azurerm_resource_group" "rg" {
   location = "West Europe"
 }
 
-
 resource "azurerm_service_plan" "asp" {
   name                = "myServicePlan"
   location            = azurerm_resource_group.rg.location
@@ -33,7 +32,7 @@ resource "azurerm_linux_web_app" "app" {
   service_plan_id     = azurerm_service_plan.asp.id
 
   site_config {
-    # Remove or comment out this line if it's present:
+    # Ensure this line is removed or commented out:
     # always_on = true
   }
 
@@ -41,8 +40,6 @@ resource "azurerm_linux_web_app" "app" {
     "WEBSITE_RUN_FROM_PACKAGE" = "1"
   }
 }
-
-
 
 resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id                = azurerm_linux_web_app.app.id
